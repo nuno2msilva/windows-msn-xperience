@@ -11,8 +11,6 @@ Six versions of Microsoft's instant messenger, running in your browser on a Wind
 | Windows Live Messenger 2009 | 2008 |
 | Windows Live Messenger 2012 | 2012 |
 
-**Try it:** https://super-panda-9e0f3e.netlify.app/
-
 Every window, picture, sound and piece of text comes from each version's original program files: the pictures and
 sounds were extracted from them, and the windows were rebuilt from the programs' own UI layouts. You can sign in,
 chat with a contact list that writes back, get nudges and winks, share files and photos, make simulated voice and
