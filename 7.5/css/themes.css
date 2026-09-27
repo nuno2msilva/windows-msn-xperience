@@ -1,0 +1,383 @@
+/* =====================================================================
+   OS chrome: Windows XP (Luna) for 4.7 / 7.0 / 7.5, Vista-style for 8.1 / 8.5
+   ===================================================================== */
+body.os-xp{background:#5a7edc linear-gradient(180deg,#3a6fd8 0%,#8ab6f0 45%,#a9d0f5 60%,#5d9f3b 61%,#4a8a2c 75%,#2f6a1a 100%)}
+body.os-vista{background:#1b4f86 radial-gradient(ellipse at 30% 110%,#3aa1e0 0%,#1d67a8 40%,#0f3563 100%)}
+
+/* XP window, taskbar and controls: css/xp.css (the Luna theme's own bitmaps) */
+
+/* Vista-style window */
+.os-vista .win{border:1px solid #29496d;border-radius:7px;background:linear-gradient(#cfe4f7,#b5d1ee 30px,#e6f0fa 31px);box-shadow:0 8px 28px #0008,inset 0 0 0 1px #ffffffa0}
+.os-vista .titlebar{height:28px;padding:0 4px 0 8px;border-radius:6px 6px 0 0;background:linear-gradient(#dbeefd,#b7d6f2 50%,#a3c7ea 51%,#b8d6f0);border-bottom:1px solid #8fb0d3}
+.os-vista .titlebar .t{color:#10273f;text-shadow:0 1px 0 #fff8}
+.os-vista .win.inactive .titlebar{filter:saturate(.3) brightness(1.04)}
+.os-vista .cap{gap:1px}
+.os-vista .cap span{width:26px;height:18px;font-size:11px;color:#fff;border:1px solid #4b6f96;background:linear-gradient(#b6d3f0,#6e9ccc 50%,#5a8abd 51%,#86b0d9)}
+.os-vista .cap span:first-child{border-radius:3px 0 0 3px}
+.os-vista .cap span:last-child{width:42px;border-radius:0 3px 3px 0;border-color:#8a2a1e;background:linear-gradient(#f0a794,#d8563c 50%,#c7381c 51%,#e0705a)}
+.os-vista .cap span:only-child{border-radius:3px}
+.os-vista .cap span:hover{filter:brightness(1.15)}
+.os-vista .menubar{background:#eef5fc;border-bottom:1px solid #c7d9ec}
+.os-vista .menubar>div{border-radius:2px}
+.os-vista .menubar>div:hover,.os-vista .menubar>div.open{background:var(--hover);border-color:var(--hover-b)}
+.os-vista .menu{background:#f5f8fb;border:1px solid #97a9bd;box-shadow:3px 3px 6px #0004}
+.os-vista .menu div{border-radius:3px}
+.os-vista .menu div:hover{background:var(--hover);border-color:var(--hover-b)}
+.os-vista .menu hr{border-top:1px solid #d5dde6}
+.os-vista .pb,.os-vista .btn{border:1px solid #707070;border-radius:3px;background:linear-gradient(#f2f2f2,#ebebeb 50%,#ddd 51%,#cfcfcf);color:#000}
+.os-vista .pb:hover,.os-vista .btn:hover{border-color:#3c7fb1;background:linear-gradient(#eaf6fd,#d9f0fc 50%,#bee6fd 51%,#a7d9f5)}
+.os-vista .dlgwin{background:#f0f0f0}
+.os-vista .dlgwin>.dlgbody,.os-vista .dlgwin>.optframe,.os-vista .dlgwin>.pad{background:#f0f0f0}
+.os-vista .dlg .et{border-top-color:#c9d3e0;border-bottom:0}
+.os-vista .dlg .lv .row.sel{background:var(--sel);color:#000}
+.os-vista .dlg .lv .tile.sel{background:var(--sel);border-color:var(--sel-b)}
+.os-vista .dlg .st.head{color:#1e3287}
+.os-vista #switcher{background:linear-gradient(#2c3e55e6,#0d1826f2);border-top:1px solid #7fa6d3}
+.os-vista #switcher .orb{width:34px;height:34px;padding:0!important;margin:0 4px 0 6px;border-radius:50%;border:1px solid #0b2a50;color:transparent;overflow:hidden;
+  background:radial-gradient(circle at 50% 35%,#b9e3ff,#2d80c9 60%,#0b3a70);box-shadow:0 0 6px #6cf8}
+.os-vista #switcher button:not(.orb){font:12px var(--font);color:#fff;background:linear-gradient(#ffffff30,#ffffff08);border:1px solid #ffffff40;border-radius:3px}
+.os-vista #switcher button:not(.orb):hover{background:linear-gradient(#ffffff55,#ffffff18)}
+.os-vista #tasks button.active{background:linear-gradient(#ffffff60,#ffffff28);border-color:#ffffff90}
+.os-vista #switcher .hint{color:#cfe3f7}
+.os-vista .startmenu{background:#1d3a5c}
+.os-vista .startmenu .smh{background:linear-gradient(#304e72,#1c3552);color:#fff}
+.os-vista .startmenu .smf{background:#1c3552;color:#cfe3f7}
+
+/* =====================================================================
+   Windows Messenger 4.7  (layout "wm")
+   ===================================================================== */
+.lay-wm #main .body{background:#fff;font:11px Tahoma,sans-serif}
+.wm-head{flex:none;height:37px;display:flex;align-items:center;gap:6px;padding:0 8px;color:#fff;font:bold 12px Tahoma;
+  background:var(--hdr) left top/auto 100% no-repeat,linear-gradient(#6f97d8,#3d6fc7)}
+.wm-head .me{display:flex;align-items:center;gap:5px;cursor:pointer;padding:2px 4px;border:1px solid transparent}
+.wm-head .me:hover{border-color:#ffffff90}
+.wm-head .me img{width:16px;height:16px}
+.wm-mail{flex:none;display:flex;align-items:center;gap:6px;padding:5px 8px;border-bottom:1px solid #d3dbe8;background:#f1f5fb;color:#1b3b8a;cursor:pointer}
+.wm-mail img{width:24px;height:22px;object-fit:contain}
+.lay-wm .group>.gh{color:#1b3b8a;font-weight:700;font-size:11px}
+.lay-wm .c{font-size:11px}
+.lay-wm .c:hover{background:#e3ecfa;border-color:#b6c9ea}
+.lay-wm .c.sel{background:#316ac5;color:#fff;border-color:#316ac5}
+.lay-wm .c.sel .ps,.lay-wm .c.sel .nm{color:#fff}
+.wm-actions{flex:none;border-top:1px solid #c6d3ea;background:linear-gradient(#f4f7fc,#e2eaf7);padding:6px 8px}
+.wm-actions .h{font-weight:700;color:#1b3b8a;margin-bottom:4px;display:flex;justify-content:space-between}
+.wm-actions .a{display:flex;align-items:center;gap:6px;padding:2px 2px;color:#1b3b8a;cursor:pointer}
+.wm-actions .a:hover{text-decoration:underline}
+.wm-actions .a img{width:16px;height:16px}
+.wm-ad{flex:none;display:flex;justify-content:center;align-items:center;padding:6px;border-top:1px solid #c6d3ea;background:#fff}
+.wm-ad img{max-width:100%}
+/* 4.7 sign-in */
+.wm-signin{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(#fff,#e9eff9);font:11px Tahoma}
+.wm-signin .logo2{width:100px}
+.wm-signin .clk{width:41px;height:41px;background-repeat:no-repeat;animation:clock 1s steps(20) infinite}
+@keyframes clock{from{background-position:0 0}to{background-position:-820px 0}}
+/* 4.7 conversation */
+.lay-wm .conv .body{background:#ece9d8;font:11px Tahoma,sans-serif}
+.wm-tb{flex:none;display:flex;gap:2px;padding:3px 6px;border-bottom:1px solid #c5c2b2;background:linear-gradient(#fbfbf8,#ece9d8)}
+.wm-tb .tbtn{flex-direction:column;height:44px;min-width:52px;font-size:11px}
+.wm-tb .tbtn:hover{border-color:#aca899;background:#fff}
+.wm-tb .tbtn img{max-height:28px;max-width:40px}
+.wm-to{flex:none;padding:4px 8px;background:#fff;border-bottom:1px solid #c5c2b2}
+.lay-wm .hist{border:1px solid #7f9db9}
+.wm-warn{color:#6b6b6b;font-size:11px;margin:4px 0 8px}
+.lay-wm .compose{border:1px solid #7f9db9}
+.lay-wm .compose .fmt{background:#ece9d8;border-bottom:1px solid #c5c2b2}
+.lay-wm .compose .fmt .tbtn:hover{border-color:#aca899;background:#fff}
+.lay-wm .compose .send .pb{width:64px;height:52px;font:bold 11px Tahoma}
+.wm-side{width:170px;flex:none;background:linear-gradient(90deg,#7ba2e7,#6375d6);border-radius:3px;padding:6px;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.wm-side .panel{background:#fff;border-radius:3px;padding:5px 6px}
+.wm-side .panel .h{font-weight:700;color:#215dc6;margin-bottom:4px}
+.wm-side .a{display:flex;gap:5px;align-items:center;color:#215dc6;cursor:pointer;padding:2px 0}
+.wm-side .a:hover{text-decoration:underline}
+.wm-side .a img{width:16px;height:16px}
+.lay-wm .statusline{color:#555}
+
+/* =====================================================================
+   MSN Messenger 7.0 / 7.5  (layout "msn7")
+   ===================================================================== */
+.lay-msn7 #main .body{background:#fff;font:11px Tahoma,sans-serif}
+.m7-top{flex:none;display:flex;min-height:0;background:linear-gradient(#dfeafb,#fff 95%)}
+.m7-head{flex:1;position:relative;padding:8px 8px 6px;display:flex;gap:8px;background:var(--hdr) right top/260px auto no-repeat}
+.m7-head .dp{width:56px;height:56px;padding:4px}
+.m7-head .info{flex:1;min-width:0}
+.m7-head .name{font:bold 12px Tahoma;color:#0a246a;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:1px 2px;border:1px solid transparent}
+.m7-head .name:hover,.m7-head .psm:hover{border-color:#9db6e4;background:#fff}
+.m7-head .psm{color:#555;margin-top:2px;padding:1px 2px;border:1px solid transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:text}
+.m7-head .psm.empty{color:#7a8aa8;font-style:italic}
+.m7-head .icons{display:flex;gap:10px;margin-top:5px;align-items:center}
+.m7-head .icons span{display:flex;align-items:center;gap:3px;cursor:pointer;color:#0a246a}
+.m7-head .icons img{height:16px}
+.m7-head input.inline{font:inherit;width:100%;border:1px solid #7f9db9;padding:1px 3px}
+.m7-tabs{width:30px;flex:none;background:linear-gradient(90deg,#c9daf6,#e8effb);border-right:1px solid #b3c6ea;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:6px}
+.m7-tabs div{width:24px;height:24px;border:1px solid transparent;border-radius:3px;display:grid;place-items:center;cursor:pointer}
+.m7-tabs div:hover,.m7-tabs div.sel{border-color:#8aa6d8;background:#fff}
+.m7-tabs img{max-width:20px;max-height:20px}
+.m7-tabbar{flex:none;display:flex;gap:4px;align-items:center;padding:3px 6px;background:linear-gradient(#f5f8fe,#dfe8f8);border-top:1px solid #c3d2ef;border-bottom:1px solid #c3d2ef}
+.m7-tabbar .tbtn:hover{border-color:#8aa6d8;background:#fff}
+.m7-list{flex:1;display:flex;min-height:0}
+.lay-msn7 .group>.gh{color:#0a246a;font-size:11px}
+.lay-msn7 .c{font-size:11px}
+.lay-msn7 .c:hover{background:#e6eefc;border-color:#aac0ea}
+.lay-msn7 .c.sel{background:#c7d8f7;border-color:#7d9fde}
+.m7-ad{flex:none;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 8px;border-top:1px solid #c3d2ef;background:#f5f8fe}
+.m7-ad .ad{flex:1;height:48px;border:1px solid #c3d2ef;background:linear-gradient(135deg,#fff,#dde8fb);display:grid;place-items:center;color:#4b6aa8;font-size:10px}
+.lay-msn7 .dp{border:4px solid transparent;border-image:var(--frame-off) 8 fill stretch;padding:2px}
+.lay-msn7 .dp.st-online{border-image:var(--frame-on) 8 fill stretch}
+/* 7.x sign-in */
+.m7-signin{flex:1;display:flex;flex-direction:column;align-items:center;background:linear-gradient(#dfeafb,#fff 40%);padding:16px 22px;gap:4px;overflow:auto;font:11px Tahoma}
+.m7-signin .dp{width:100px;height:100px;margin-bottom:10px}
+.m7-signin .f{align-self:stretch;display:flex;flex-direction:column;gap:2px;margin-top:4px}
+.m7-signin input,.m7-signin select{font:11px Tahoma;padding:2px 4px;border:1px solid #7f9db9}
+.m7-signin .row{display:flex;align-items:center;gap:6px}
+.m7-signin .ck{align-self:stretch;display:flex;flex-direction:column;gap:3px;margin-top:8px}
+.m7-signin .ck label{display:flex;gap:4px;align-items:center}
+.m7-signin .pb{margin-top:12px;min-width:80px;height:23px}
+.m7-signin .links{margin-top:auto;display:flex;flex-direction:column;gap:3px;align-items:center;padding-top:20px}
+.m7-signin .anim{width:75px;height:69px;margin:20px 0 6px}
+/* 7.x conversation */
+.lay-msn7 .conv .body{background:linear-gradient(#e7effc,#fff 90px);font:11px Tahoma,sans-serif}
+.m7-ctb{flex:none;display:flex;gap:1px;padding:3px 6px;border-bottom:1px solid #c3d2ef;background:linear-gradient(#f7f9fe,#dfe8f8)}
+.m7-ctb .tbtn{flex-direction:column;height:46px;min-width:50px;font-size:11px;color:#0a246a}
+.m7-ctb .tbtn:hover{border-color:#8aa6d8;background:#fff}
+.m7-ctb .tbtn img{max-height:29px;max-width:34px}
+.m7-ctb .sp{flex:1}
+.m7-to{flex:none;padding:4px 8px 2px;color:#0a246a}
+.m7-to b{font-weight:700}
+.lay-msn7 .hist{border:1px solid #9db6e4}
+.lay-msn7 .compose{border:1px solid #9db6e4}
+.lay-msn7 .compose .fmt{background:linear-gradient(#fbfcff,#e6eefc);border-bottom:1px solid #c3d2ef}
+.lay-msn7 .compose .fmt .tbtn:hover{border-color:#8aa6d8;background:#fff}
+.lay-msn7 .compose .send .pb{min-width:60px;height:30px}
+.lay-msn7 .side .dp{width:110px;height:110px}
+.lay-msn7 .side .arrow{width:18px;height:18px;margin-top:3px;cursor:pointer}
+.lay-msn7 .statusline{color:#4b5f86}
+
+/* =====================================================================
+   Windows Live Messenger 8.1 / 8.5  (layout "wlm")
+   ===================================================================== */
+.lay-wlm .dp{border-radius:6px;padding:3px;background:linear-gradient(#fff,#d8e6f3);border:1px solid #7f9bb8;box-shadow:inset 0 0 0 1px #fff}
+.lay-wlm .dp img{border-radius:3px}
+.lay-wlm .dp::after{content:"";position:absolute;inset:0;border-radius:6px;box-shadow:inset 0 0 0 3px var(--st,var(--on));opacity:.85;pointer-events:none}
+.lay-wlm #main .body{background:#fff;border-radius:0 0 6px 6px}
+.w-me{position:relative;padding:10px 10px 8px;display:flex;gap:10px;flex:none;background:var(--hdr) right top no-repeat,linear-gradient(#bfe0f7,#e9f5fd);border-bottom:1px solid #c4dbef}
+.w-me .dp{width:66px;height:66px;cursor:pointer}
+.w-me .info{flex:1;min-width:0;padding-top:4px}
+.w-me .name{font-size:15px;color:#0b2a4d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;border:1px solid transparent;border-radius:2px;padding:0 3px}
+.w-me .name:hover,.w-me .psm:hover{border-color:#9fc0e2;background:#ffffff80}
+.w-me .name small{font-size:12px;color:#335}
+.w-me .psm{margin-top:2px;color:#4f6b86;cursor:text;border:1px solid transparent;border-radius:2px;padding:1px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w-me .psm.empty{color:#7d93a8;font-style:italic}
+.w-me input.inline{font:inherit;width:100%;border:1px solid #7eb4ea;padding:1px 3px;border-radius:2px}
+.w-me .icons{display:flex;gap:8px;margin-top:6px;align-items:center}
+.w-me .icons span{display:flex;gap:3px;align-items:center;color:#123;cursor:pointer;padding:1px 3px;border-radius:2px}
+.w-me .icons span:hover{background:#ffffff90}
+.w-me .icons img{height:16px}
+.w-search{display:flex;gap:4px;padding:5px 6px;background:linear-gradient(#f4f9fe,#e4eef8);border-bottom:1px solid #cbdcee;flex:none}
+.w-search input{flex:1;font:inherit;padding:3px 6px;border:1px solid #a6bdd6;border-radius:2px;min-width:0}
+.w-search input::placeholder{color:#8a9aac;font-style:italic}
+.lay-wlm .tbtn{border-radius:3px}
+.lay-wlm .tbtn:hover{border-color:var(--hover-b);background:linear-gradient(#f4faff,#d9eafb)}
+.lay-wlm .group>.gh{color:var(--grp)}
+.lay-wlm .group>.gh:hover{background:#f0f6fd}
+.lay-wlm .group .cnt{color:#6a84a0}
+.lay-wlm .c{border-radius:3px}
+.lay-wlm .c:hover{background:var(--hover);border-color:var(--hover-b)}
+.lay-wlm .c.sel{background:var(--sel);border-color:var(--sel-b)}
+.w-ad{flex:none;border-top:1px solid #d3e1ef;padding:6px;background:#f4f8fc;display:flex;justify-content:center}
+.w-ad img{max-width:100%;height:auto;border:1px solid #c2d3e5}
+/* 8.x sign-in */
+.w-signin{flex:1;display:flex;flex-direction:column;align-items:center;min-height:0;overflow-y:auto;background:var(--hdr) right top no-repeat,linear-gradient(#bfe0f7,#fff 60%)}
+.w-signin .tilewrap{position:relative;width:119px;height:119px;margin:20px 0 17px;flex:none}
+.w-signin .tilewrap img.pic{position:absolute;left:9px;top:9px;width:94px;height:94px;object-fit:cover}
+.w-signin .tilewrap img.fr{position:absolute;inset:0;width:119px;height:119px}
+.w-signin .form{align-self:stretch;padding:0 24px;display:flex;flex-direction:column}
+.w-signin .lbl{margin-top:4px}
+.w-signin .combo{display:flex;border:1px solid #a6bdd6;border-radius:2px;background:#fff;margin-top:2px}
+.w-signin .combo input{flex:1;min-width:0;border:0;outline:0;font:inherit;padding:3px 5px}
+.w-signin .combo button{border:0;border-left:1px solid #d5e1ee;background:linear-gradient(#fbfdff,#e3edf7);width:18px;cursor:pointer;font-size:9px;color:#345}
+.w-signin .caps{display:none;margin-top:4px;padding:4px 6px;font-size:11px;background:#ffffe1;border:1px solid #a0a0a0}
+.w-signin .asrow{display:flex;align-items:center;gap:4px;margin-top:8px}
+.w-signin .stchooser{display:flex;align-items:center;gap:4px;padding:1px 4px;border:1px solid transparent;border-radius:2px;cursor:pointer;color:#0b2a4d}
+.w-signin .stchooser:hover{border-color:var(--hover-b);background:var(--hover)}
+.w-signin .stchooser img{width:16px;height:16px}
+.w-signin .opts{margin-top:16px;padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.w-signin .opts label{display:flex;gap:5px;align-items:center}
+.w-signin .opts .forget{margin-left:20px;font-size:11px}
+.w-signin .btns{display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:18px}
+.w-signin .btns .btn{min-width:69px;height:23px}
+.w-signin .progress{display:none;flex-direction:column;align-items:center;gap:6px;margin-top:10px;width:226px;align-self:center}
+.w-signin .progress .who{color:#0b2a4d;font-weight:600;max-width:226px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.w-signin .progress .txt{font-size:13px}
+.w-signin.busy .fields,.w-signin.busy .opts,.w-signin.busy [data-b="signin"]{display:none}
+.w-signin.busy .progress{display:flex}
+.w-signin .links{margin-top:auto;padding:40px 8px 6px;display:flex;flex-direction:column;gap:2px;width:226px}
+.w-signin .foot{align-self:stretch;display:flex;align-items:center;gap:4px;padding:3px 6px;color:#556;font-size:11px;border-top:1px solid #d7e3ef;background:#f4f8fc}
+.w-signin .foot img{width:14px;height:14px}
+.buddyspin{position:relative;width:70px;height:70px;margin-top:5px}
+.buddyspin .orbit{position:absolute;inset:0;animation:orbit 1.6s linear infinite}
+.buddyspin .b{position:absolute;width:30px;height:30px;left:20px;animation:counter 1.6s linear infinite}
+.buddyspin .b.g{top:0}
+.buddyspin .b.bl{bottom:0;filter:hue-rotate(95deg) saturate(1.4)}
+.buddyspin .ring{position:absolute;inset:3px;border-radius:50%;border:2px dotted #8cc97a;opacity:.55;animation:orbit 4s linear infinite reverse}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes counter{0%{transform:rotate(0) scale(1)}25%{transform:rotate(-90deg) scale(.8)}50%{transform:rotate(-180deg) scale(1)}75%{transform:rotate(-270deg) scale(1.15)}100%{transform:rotate(-360deg) scale(1)}}
+/* 8.x conversation */
+.lay-wlm .conv .body{background:linear-gradient(#e7f2fc,#f7fbff 120px);border-radius:0 0 6px 6px}
+.w-chead{flex:none;padding:6px 10px 4px}
+.w-chead b{font-size:14px;font-weight:600;color:#0b2a4d}
+.w-chead .sub{color:#56708c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w-ctb{flex:none;display:flex;gap:1px;padding:2px 8px;border-bottom:1px solid #c6dbef}
+.w-ctb .tbtn{height:40px;min-width:48px;flex-direction:column;gap:1px;font-size:10px;color:#1c3f66;padding:2px 5px}
+.lay-wlm .hist{border:1px solid #a9c1da;border-radius:4px}
+.lay-wlm .compose{border:1px solid #a9c1da;border-radius:4px}
+.lay-wlm .compose .fmt{border-bottom:1px solid #e1eaf3;background:linear-gradient(#fbfdff,#eef4fa);border-radius:4px 4px 0 0}
+.lay-wlm .compose .send .btn{min-width:60px;height:28px}
+.lay-wlm .statusline{color:#55708b}
+.lay-wlm .side .lbl{color:#56708c}
+.lay-wlm .plist .hd{color:var(--grp);border-bottom:1px solid #c6dbef}
+.lay-wlm .plist .p{border-radius:3px}
+.lay-wlm .plist .p:hover{background:var(--hover);border-color:var(--hover-b)}
+.lay-wlm .toast{border:1px solid #5b7fa8;border-radius:5px;background:linear-gradient(#e9f4fd,#fff 60%)}
+.lay-wlm .toast .th{background:linear-gradient(#cfe5f8,#a9cbeb)}
+.lay-msn7 .toast,.lay-wm .toast{border:1px solid #4a6bb5;background:linear-gradient(#fff,#dde8fb);font:11px Tahoma}
+.lay-msn7 .toast .th,.lay-wm .toast .th{background:linear-gradient(#5f8ee6,#3a6ad2);color:#fff}
+.lay-wlm .card{border-radius:5px;background:linear-gradient(#e6f2fd,#fff 70px)}
+
+/* section headings sit on top of their etched divider line */
+.os-xp .dlg .st.head{background:#ece9d8}
+.os-xp .proppage .dlg .st.head{background:#fcfcfe}
+.os-vista .dlg .st.head{background:#f0f0f0}
+
+/* =====================================================================
+   Windows Live Messenger 2012 (layout "w12")  — scenes, glass tiles, tabbed conversations
+   ===================================================================== */
+.lay-w12 #mainMenu{display:none}
+.lay-w12 #main .body{background:#fff;border-radius:0 0 6px 6px;font:12px var(--font)}
+.lay-w12 .dp{border-radius:6px;padding:2px;background:#fff;border:3px solid var(--st,var(--on));box-shadow:0 1px 3px #0005,inset 0 0 0 1px #fff}
+.lay-w12 .dp img{border-radius:3px}
+.lay-w12 .st-away,.lay-w12 .st-brb,.lay-w12 .st-lunch{--st:#f7a51d}
+.lay-w12 .st-busy,.lay-w12 .st-call{--st:#e0323c}
+.lay-w12 .st-online{--st:#58c21a}
+.lay-w12 .st-offline{--st:#c4ccd4}
+.w12-head{flex:none;position:relative;height:110px;background:var(--scene-s) center/cover,#dff0fb;display:flex;align-items:flex-start;padding:12px 10px 0}
+.w12-me{flex:1;display:flex;gap:10px;min-width:0}
+.w12-me .dp{width:70px;height:70px;cursor:pointer}
+.w12-me .info{min-width:0;flex:1;padding-top:2px;text-shadow:0 0 6px #fff,0 0 3px #fff}
+.w12-me .name{font-size:17px;font-weight:300;color:#1a1a1a;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w12-me .st{display:flex;align-items:center;gap:4px;color:#333;margin-top:1px}
+.w12-me .st img{width:12px;height:12px}
+.w12-me .psm{margin-top:5px;padding:2px 5px;background:#ffffffc0;border:1px solid #ffffff;border-radius:2px;color:#333;cursor:text;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w12-me .psm.empty{color:#888;font-style:italic}
+.w12-me input.inline{font:inherit;width:100%;border:1px solid #7eb4ea;padding:2px 5px}
+.w12-icons{display:flex;gap:6px;align-items:center}
+.w12-icons span{display:flex;align-items:center;gap:3px;padding:2px 4px;border-radius:3px;cursor:pointer;background:#ffffffa0;font-size:11px;color:#222}
+.w12-icons span:hover{background:#fff}
+.w12-icons img{height:15px}
+.w12-search{flex:none;display:flex;gap:4px;padding:6px;border-bottom:1px solid #e3e8ee}
+.w12-search input{flex:1;min-width:0;font:inherit;padding:4px 7px;border:1px solid #c2ccd6;border-radius:2px}
+.w12-search input::placeholder{color:#8b96a1;font-style:italic}
+.lay-w12 .tbtn{border-radius:3px}
+.lay-w12 .tbtn:hover{border-color:#b9d7f3;background:linear-gradient(#f4faff,#e1effc)}
+.w12-social{flex:none;max-height:190px;overflow:auto;border-bottom:1px solid #e3e8ee;padding:4px 8px 6px;background:#fafcfe}
+.w12-social .h{display:flex;justify-content:space-between;font-size:13px;color:#2a6db5;padding:2px 0 4px}
+.w12-social .h a{font-size:11px}
+.w12-social .it{display:flex;gap:8px;padding:5px 0;border-top:1px solid #edf1f5;font-size:11px;color:#333}
+.w12-social .it .dp{width:34px;height:34px;border-width:2px;padding:1px}
+.w12-social .it b{color:#1a4f8b;font-weight:600}
+.w12-social .acts{margin-top:2px;color:#888}
+.lay-w12 .group>.gh{color:#2a6db5;font-weight:400;font-size:13px}
+.lay-w12 .group .cnt{color:#8a97a4}
+.lay-w12 .c{border-radius:3px;padding-top:3px;padding-bottom:3px}
+.lay-w12 .c:hover{background:#eef6fd;border-color:#cfe4f8}
+.lay-w12 .c.sel{background:#dcecfb;border-color:#a9cff3}
+.lay-w12 .c .si{width:12px;height:12px}
+.lay-w12 .pics-small .c .mini,.lay-w12 .pics-medium .c .mini,.lay-w12 .pics-large .c .mini{border-width:2px}
+/* 2012 sign-in */
+.w12-signin{flex:1;display:flex;flex-direction:column;align-items:center;overflow:auto;background:linear-gradient(#e9f5fd,#fff 50%);padding-bottom:10px}
+.w12-signin .art{width:210px;height:175px;object-fit:cover;object-position:center 60%;margin:18px 0 10px;border-radius:4px;box-shadow:0 2px 8px #0003}
+.w12-signin .fields{width:230px;display:flex;flex-direction:column;gap:6px}
+.w12-signin input:not([type=checkbox]){font:inherit;padding:5px 7px;border:1px solid #b4c3d2;border-radius:2px}
+.w12-signin .asrow{display:flex;align-items:center;gap:4px;margin:2px 0}
+.w12-signin .stchooser{display:flex;align-items:center;gap:4px;padding:1px 4px;border:1px solid transparent;border-radius:2px;cursor:pointer;color:#1a4f8b}
+.w12-signin .stchooser:hover{border-color:var(--hover-b);background:var(--hover)}
+.w12-signin .stchooser img{width:12px;height:12px}
+.w12-signin label{display:flex;gap:5px;align-items:center;color:#333}
+.w12-signin [data-b="signin"]{align-self:flex-start;min-width:80px;height:26px;margin-top:6px}
+.w12-signin .progress{display:none;flex-direction:column;align-items:center;gap:10px;margin-top:20px}
+.w12-signin .progress .spin{width:32px;height:32px;animation:orbit 1.2s linear infinite}
+.w12-signin .progress .btn{min-width:80px;height:24px}
+.w12-signin.busy .fields{display:none}
+.w12-signin.busy .progress{display:flex}
+.w12-signin .links{margin-top:auto;padding-top:20px;display:flex;gap:12px;font-size:11px}
+/* 2012 tabbed conversation window */
+.w12host{width:720px;height:520px}
+.w12host>.body{flex-direction:row!important;background:#fff;border-radius:0 0 6px 6px}
+.w12tabs{flex:none;width:58px;background:linear-gradient(90deg,#e7eef6,#f3f7fb);border-right:1px solid #d5dfe9;display:flex;flex-direction:column;gap:6px;padding:8px 5px;overflow-y:auto}
+.w12tabs .tab{position:relative;width:46px;height:46px;border-radius:5px;cursor:pointer;padding:2px;border:1px solid transparent}
+.w12tabs .tab.sel{background:#fff;border-color:#9fc5ec;box-shadow:0 1px 3px #0002}
+.w12tabs .tab .dp{width:40px;height:40px;border-width:2px;padding:1px}
+.w12tabs .tab img.grp{width:40px;height:40px}
+.w12tabs .tab .x{display:none;position:absolute;right:-3px;top:-3px;width:14px;height:14px;border-radius:50%;background:#c33;color:#fff;font-size:8px;line-height:14px;text-align:center}
+.w12tabs .tab:hover .x{display:block}
+.w12pages{flex:1;min-width:0;display:flex}
+.w12page{flex:1;min-width:0;display:flex;flex-direction:column}
+.w12-chead{flex:none;height:78px;display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--scene-w) left center/cover,#dff0fb}
+.w12-chead .who{flex:1;min-width:0;text-shadow:0 0 6px #fff,0 0 3px #fff}
+.w12-chead .who b{font-size:16px;font-weight:400;color:#111}
+.w12-chead .who .st{display:inline-flex;align-items:center;gap:3px;color:#333;margin-left:4px}
+.w12-chead .who .st img{width:11px;height:11px}
+.w12-chead .who .sub{color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.w12-chead .acts{display:flex;gap:1px;background:#ffffffc8;border-radius:4px;padding:2px}
+.w12-chead .acts .tbtn{flex-direction:column;height:40px;min-width:44px;font-size:10px;color:#1c3f66}
+.w12-main{flex:1;display:flex;gap:8px;padding:8px;min-height:0}
+.w12-main .pane.side{width:110px;flex-direction:column;justify-content:space-between}
+.w12-main .pane.side .dp{width:100px;height:100px}
+.w12-main .pane.plist{width:140px}
+.lay-w12 .hist{border:1px solid #d9e1e9;border-radius:3px}
+.lay-w12 .compose{border:1px solid #c2ccd6;border-radius:3px}
+.lay-w12 .compose .fmt{border-bottom:1px solid #edf1f5;background:#f9fbfd}
+.lay-w12 .compose textarea,.lay-w12 .inkpad{height:var(--inh,52px)}
+.lay-w12 .statusline{color:#6b7b8c}
+.lay-w12 .toast{border:1px solid #9fb6cc;border-radius:4px;background:#fff}
+.lay-w12 .toast .th{background:linear-gradient(#f4f8fc,#e6eef6);color:#333}
+/* scene picker */
+.sceneprev{height:70px;border-radius:3px;background-size:cover;background-position:center;border:1px solid #c2ccd6}
+.scenegrid{flex:1;min-height:0;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px;background:#fff;border:1px solid #c2ccd6;padding:6px}
+.scenegrid .sc{border:2px solid transparent;border-radius:3px;cursor:pointer;font-size:11px;text-align:center;padding:2px}
+.scenegrid .sc img{width:100%;height:32px;object-fit:cover;display:block;border-radius:2px}
+.scenegrid .sc:hover{background:var(--hover)}
+.scenegrid .sc.sel{border-color:#3c8fdc;background:#e6f1fc}
+.lay-w12 .c.chatgroup .gt{width:22px;height:22px;object-fit:contain;flex:none}
+.w12-signin .heading{font:300 18px var(--font);color:#1a4f8b;text-align:center;margin-bottom:10px}
+.w12-signin .caps{display:none;font-size:11px;background:#ffffe1;border:1px solid #a0a0a0;padding:3px 5px}
+.w12-signin .links{flex-direction:column;align-items:center;gap:3px;text-align:center}
+.inv12 .top{display:flex;gap:10px;align-items:center}
+.inv12 .top .dp{width:56px;height:56px}
+.inv12 .h{font-size:14px;color:#1a4f8b}
+.inv12 .em{color:#666;font-size:11px}
+.inv12 .ckb{display:flex;gap:5px;align-items:center;font-size:11px}
+/* wizard / dialog parts on the XP window (whose own background carries the blue frame edges) */
+.os-xp .win>.wizbody,.os-xp .win>.wizsep,.os-xp .win>.dlgbtns{background:#ece9d8}
+.os-xp .win>.histbody{background:#fff}
+.os-vista .win>.wizbody,.os-vista .win>.wizsep,.os-vista .win>.dlgbtns{background:#f0f0f0}
+
+/* MSN 6.2: the large status buddy beside your name (PNG 701 / 719 / 720 / 721) */
+.m7-head .bigst{width:32px;height:45px;flex:none;margin:2px 4px 0 2px}
+.m7-actions .a img{width:auto;max-height:20px}
+/* Messenger 2009: the scene you pick fills the top of the main window and the conversation header */
+body.has-scene .w-me{background:var(--scene-w) center/cover no-repeat,#dff0fb}
+body.has-scene .w-chead{background:var(--scene-w) center/cover no-repeat,#dff0fb}
+body.has-scene .w-me .name,body.has-scene .w-me .psm,body.has-scene .w-chead b,body.has-scene .w-chead .sub{text-shadow:0 0 3px #fff,0 0 6px #fff}
+
+/* 2012 with "Enable tabbed conversations" off: each conversation in its own window (the menu is behind ☰, no menu bar) */
+.lay-w12 .win.conv:not(.w12host)>.menubar{display:none}
+.lay-w12 .win.conv:not(.w12host)>.body{display:flex;flex-direction:column;background:#fff;border-radius:0 0 6px 6px}
+.ftbox .ftpv{height:auto;max-height:96px;border:1px solid #b9c7d8;border-radius:2px;object-fit:cover;flex:none}
+/* 4.7 Tools › Use Windows Color Scheme: plain system colours instead of Messenger's blue shading */
+body.wincolors.lay-wm .win .body,body.wincolors.lay-wm .wm-actions,body.wincolors.lay-wm .wm-head{background:#ece9d8!important}
+/* Messenger 2009 "What's new" area (strings 62101-62143): one item at a time with previous / next */
+.w9-new{flex:none;border-top:1px solid #c4dbef;background:linear-gradient(#f4f9fe,#e6f1fb);padding:4px 8px 6px}
+.w9-new .h{display:flex;align-items:center;justify-content:space-between;color:#1e3287;font-weight:600;margin-bottom:3px}
+.w9-new .nav{display:flex;align-items:center;gap:2px;font-weight:400;color:#56708c;font-size:11px}
+.w9-new .nav .tbtn{padding:0 4px;font-size:9px;min-width:0}
+.w9-new .it{display:flex;gap:6px;align-items:center}.w9-new .it .dp{width:32px;height:32px;flex:none}

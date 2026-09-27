@@ -1,0 +1,683 @@
+/* Shared structure for every Messenger version. Version / OS looks live in themes.css. */
+:root{
+  --font:"Segoe UI",Tahoma,"DejaVu Sans",Arial,sans-serif;
+  --dlgfont:Tahoma,"Segoe UI","DejaVu Sans",Arial,sans-serif;
+  --text:#1e1e1e; --muted:#6b7b8c; --link:#0d4ea3; --grp:#1f4e8c;
+  --hover:#dcecfc; --hover-b:#a9cdf2; --sel:#c4ddf8; --sel-b:#7eb4ea;
+  --on:#4fb52b; --away:#f2a51c; --busy:#d6362e; --off:#9aa5b1;
+  --dlu-x:1.5px; --dlu-y:1.625px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:12px/1.35 var(--font);color:var(--text);overflow:hidden;user-select:none;background:#1b4f86}
+a,.lnk{color:var(--link);cursor:pointer;text-decoration:none}
+a:hover,.lnk:hover{text-decoration:underline}
+.u{text-decoration:underline}
+button{font:inherit}
+
+/* ---------------- taskbar / switcher (mockup navigation) ---------------- */
+#switcher{position:fixed;left:0;right:0;bottom:0;height:40px;z-index:9999;display:flex;align-items:center;gap:6px;padding:0 10px 0 0;overflow-x:auto}
+#switcher button{flex:none;height:28px;padding:0 10px;cursor:pointer;display:flex;align-items:center;gap:6px}
+#switcher button img{width:16px;height:16px;object-fit:contain}
+#tasks{display:flex;gap:4px;min-width:0;overflow:hidden;flex:0 1 auto}
+#tasks button{max-width:180px;min-width:0!important;flex:0 1 180px;overflow:hidden}
+#tasks button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.startmenu .sep{border-top:1px solid #d5d5d5;margin:4px 2px}
+.startmenu .sec{font-size:11px;color:#777;padding:4px 8px 2px}
+.startmenu .it.small img{width:20px;height:20px}
+#switcher .hint{margin-left:auto;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:11px;padding-left:12px;white-space:nowrap}
+#switcher .orb span{font-style:italic;font-weight:700}
+.startmenu{position:fixed;left:0;bottom:40px;z-index:99990;width:320px;border-radius:6px 6px 0 0;overflow:hidden;box-shadow:2px -2px 12px #0008}
+.startmenu .smh{padding:10px 12px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px}
+.startmenu .smh img{width:40px;height:40px;object-fit:contain}
+.startmenu .smb{background:#fff;padding:6px}
+.startmenu .it{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:3px;cursor:pointer}
+.startmenu .it:hover{background:#316ac5;color:#fff}
+.startmenu .it.cur{font-weight:700}
+.startmenu .it img{width:32px;height:32px;object-fit:contain}
+.startmenu .it small{display:block;font-weight:400;opacity:.75}
+.startmenu .smf{padding:6px 10px;font-size:11px;text-align:right}
+
+/* ---------------- windows ---------------- */
+.win{position:absolute;display:flex;flex-direction:column;min-width:240px;min-height:160px}
+.win.hidden{display:none}
+.titlebar{flex:none;display:flex;align-items:center;gap:6px;cursor:default}
+.titlebar img{width:16px;height:16px;object-fit:contain}
+.titlebar .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cap{display:flex}
+.cap span{display:grid;place-items:center;cursor:pointer}
+.rh{position:absolute;z-index:5}
+.rh.n,.rh.s{left:6px;right:6px;height:6px;cursor:ns-resize}.rh.n{top:-3px}.rh.s{bottom:-3px}
+.rh.e,.rh.w{top:6px;bottom:6px;width:6px;cursor:ew-resize}.rh.e{right:-3px}.rh.w{left:-3px}
+.rh.ne,.rh.nw,.rh.se,.rh.sw{width:12px;height:12px}
+.rh.ne{top:-3px;right:-3px;cursor:nesw-resize}.rh.sw{bottom:-3px;left:-3px;cursor:nesw-resize}
+.rh.nw{top:-3px;left:-3px;cursor:nwse-resize}.rh.se{bottom:-3px;right:-3px;cursor:nwse-resize}
+.win.maxed{border-radius:0!important}.win.maxed .rh{display:none}.win.maxed .titlebar{border-radius:0!important}
+.grip{position:absolute;right:2px;bottom:2px;width:12px;height:12px;pointer-events:none;opacity:.55;
+  background:linear-gradient(135deg,transparent 50%,#7f9bb8 50%,#7f9bb8 58%,transparent 58%,transparent 70%,#7f9bb8 70%,#7f9bb8 78%,transparent 78%)}
+.shake{animation:shake .5s linear 2}
+@keyframes shake{0%,100%{translate:0 0}20%{translate:-9px 4px}40%{translate:8px -5px}60%{translate:-7px -3px}80%{translate:6px 5px}}
+.fadein{animation:fadein .35s ease-out}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* ---------------- menus ---------------- */
+.menubar{display:flex;padding:1px 4px;flex:none}
+.menubar>div{padding:2px 8px;border:1px solid transparent;cursor:default}
+.menu{position:fixed;min-width:200px;padding:2px}
+.menu div{padding:4px 22px 4px 26px;white-space:nowrap;border:1px solid transparent;position:relative;cursor:default}
+.menu hr{border:0;margin:3px 2px 3px 26px}
+.menu div.checked::before{content:"✓";position:absolute;left:8px}
+.menu div.radio::before{content:"●";position:absolute;left:9px;font-size:8px;top:7px}
+.menu div.sub::after{content:"▶";position:absolute;right:7px;font-size:8px;top:7px}
+.menu div img{position:absolute;left:5px;top:4px;width:16px;height:16px;object-fit:contain}
+.menu div.dis{color:#999}
+.menu .mh{padding:3px 8px 1px;color:#6b7b8c;font-size:11px;border:0}
+.menu div .acc{position:absolute;right:10px;color:#888}
+
+/* ---------------- display pictures ---------------- */
+.dp{position:relative;flex:none;padding:3px}
+.dp img{display:block;width:100%;height:100%;object-fit:cover}
+.st-online{--st:var(--on)} .st-away,.st-brb,.st-lunch{--st:var(--away)} .st-busy,.st-call{--st:var(--busy)} .st-offline{--st:var(--off)}
+
+/* ---------------- contact list ---------------- */
+#main{left:24px;top:18px;width:318px;height:640px}
+#main .body{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative}
+.clist{flex:1;overflow-y:auto;padding:4px 0;background:#fff}
+.group>.gh{display:flex;align-items:center;gap:4px;padding:3px 8px;cursor:pointer;font-weight:600}
+.group>.gh .tri{width:10px;display:inline-block;transition:transform .15s;font-size:9px}
+.group.collapsed .tri{transform:rotate(-90deg)}
+.group.collapsed .items{display:none}
+.group .cnt{font-weight:400}
+.c{display:flex;align-items:center;gap:6px;padding:2px 8px 2px 22px;border:1px solid transparent;margin:0 3px;cursor:default;white-space:nowrap;overflow:hidden}
+.c .si{width:16px;height:16px;flex:none;object-fit:contain}
+.c .lines{display:flex;gap:6px;min-width:0;align-items:baseline;flex:1}
+.c .nm{flex:none;max-width:60%;overflow:hidden;text-overflow:ellipsis}
+.c .ps{color:#7a8795;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.c .ps.song{color:#56759a;font-style:italic}
+.c.off .nm{color:#8c96a0}
+.c.nonim .nm{color:#55606b;font-style:italic}
+.c .gleam{color:#e9a100;font-size:11px;flex:none}
+.c .mini{display:none}
+.pics-small .c .mini{display:block;width:22px;height:22px;padding:1px}
+.pics-medium .c .mini{display:block;width:34px;height:34px;padding:2px}
+.pics-large .c .mini{display:block;width:50px;height:50px;padding:3px}
+.pics-small .c .si,.pics-medium .c .si,.pics-large .c .si{display:none}
+.pics-medium .c,.pics-large .c{padding-top:3px;padding-bottom:3px}
+.pics-medium .c .lines,.pics-large .c .lines{flex-direction:column;gap:0}
+.pics-medium .c .nm,.pics-large .c .nm,.pics-medium .c .ps,.pics-large .c .ps{max-width:100%}
+.pics-medium .c .ps .dash,.pics-large .c .ps .dash{display:none}
+.emo{display:inline-block;width:19px;height:19px;vertical-align:-4px;background-repeat:no-repeat}
+.emo.anim{animation:emoanim var(--d) steps(var(--f)) infinite}
+@keyframes emoanim{from{background-position:0 0}to{background-position:calc(var(--f) * -19px) 0}}
+
+/* ---------------- conversation windows ---------------- */
+.conv{width:590px;height:480px}
+.conv .body{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative}
+.conv .main{flex:1;display:flex;min-height:0;gap:8px;padding:8px}
+.conv .left{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.hist{flex:1;overflow-y:auto;background:#fff;padding:6px 8px;user-select:text}
+.hist .m .from{color:#6d7c8c;margin-top:6px}
+.hist .m .txt{padding-left:12px;word-wrap:break-word;white-space:pre-wrap}
+.hist .m.grouped .from{display:none}
+.hist .ts{color:#9aa7b4;font-size:10px;margin-left:4px}
+.hist .sys{color:#6b7b8c;margin:6px 0;display:flex;gap:5px;align-items:flex-start}
+.hist .sys img{width:16px;height:16px;object-fit:contain}
+.hist .nudge{color:#1d4f86;font-weight:600;margin:6px 0}
+.compose{flex:none;display:flex;flex-direction:column;background:#fff}
+.compose .fmt{display:flex;gap:1px;padding:2px 3px;position:relative;align-items:center}
+.compose .row{display:flex}
+.compose textarea{flex:1;height:var(--inh,58px);resize:none;border:0;outline:0;font:13px var(--font);padding:4px 6px;user-select:text}
+.compose .send{display:flex;flex-direction:column;gap:3px;padding:4px}
+.tbtn{height:24px;min-width:24px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:2px;background:none;cursor:pointer;padding:0 4px;font:inherit;color:inherit}
+.tbtn img{max-width:22px;max-height:22px;object-fit:contain}
+.statusline{flex:none;padding:3px 10px 5px;font-size:11px;min-height:20px}
+.side{flex:none;width:118px;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
+.side .dp{width:106px;height:106px}
+.side .lbl{font-size:10px;text-align:center;margin-top:2px}
+.side .dpbox{display:flex;flex-direction:column;align-items:center}
+.plist{width:150px;flex:none;display:flex;flex-direction:column;gap:4px;overflow-y:auto;overflow-x:hidden}
+.plist .p{display:flex;gap:6px;align-items:center;padding:3px;border:1px solid transparent}
+.plist .p .dp{width:40px;height:40px;padding:2px}
+.plist .p .n{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plist .p .s{font-size:11px;color:#6b7b8c}
+.plist .hd{font-weight:600;padding:2px 3px}
+.popup{position:fixed;z-index:600;background:#fff;border:1px solid #8ea7c1;box-shadow:2px 3px 8px #0004;padding:6px}
+.emogrid{display:grid;grid-template-columns:repeat(12,26px);gap:2px;max-height:240px;overflow-y:auto}
+.emogrid span{width:26px;height:26px;display:grid;place-items:center;border:1px solid transparent;cursor:pointer}
+.emogrid span:hover{border-color:var(--hover-b);background:var(--hover)}
+
+/* ---------------- toast & contact card ---------------- */
+.toast{position:fixed;right:0;bottom:30px;width:230px;z-index:9000;overflow:hidden;box-shadow:0 4px 14px #0007;transform:translateY(100%);clip-path:inset(0 0 100% 0);transition:transform .4s ease-out,clip-path .4s ease-out,opacity .12s ease;cursor:pointer;pointer-events:none}
+/* an alert slides up out of the edge below it (the taskbar, or the alert underneath) and back down when it goes */
+.toast.show{transform:none;clip-path:inset(-20px -20px 0 -20px);pointer-events:auto}
+.toast .th{display:flex;align-items:center;gap:5px;padding:3px 6px;font-size:11px}
+.toast .th img{width:14px;height:14px;object-fit:contain}
+.toast .th b{flex:1;font-weight:400}
+.toast .tb{display:flex;gap:8px;padding:10px 10px 12px;align-items:center}
+.toast .tb .dp{width:48px;height:48px}
+.toast .tb .big{width:32px;height:45px;object-fit:contain}
+.toast .tb .lnk{font-weight:600}
+.card{position:fixed;z-index:8000;width:260px;box-shadow:0 4px 14px #0005;padding:10px;display:none;background:#fff;border:1px solid #7f9bb8}
+.card .top{display:flex;gap:10px}
+.card .dp{width:64px;height:64px}
+.card b{font-size:13px}
+.card .em{color:#6b7b8c;font-size:11px}
+.card .acts{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------------- Win32 dialogs rendered from the original DIALOG resources ---------------- */
+.dlgwin{background:#ece9d8}
+.dlgbody{position:relative;flex:1;min-height:0;overflow:auto;font:11px var(--dlgfont);color:#000}
+.dlg{position:relative;font:11px/1.2 var(--dlgfont)}
+.dlg>*{position:absolute}
+.dlg .st{white-space:pre-wrap;overflow:hidden}
+.dlg .st.r{text-align:right}.dlg .st.c{text-align:center}
+.dlg .et{height:1px!important;border-top:1px solid #aca899;border-bottom:1px solid #fff}
+.dlg label.ck{display:flex;gap:4px;align-items:flex-start}
+.dlg label.ck input{margin:0;flex:none;width:13px;height:13px}
+.dlg label.ck span{white-space:pre-wrap}
+.dlg .pb{font:11px var(--dlgfont);padding:0 4px;cursor:pointer}
+.dlg .gb{border:1px solid #d0d0bf;border-radius:3px}
+.dlg .gb>b{position:absolute;top:-7px;left:6px;background:inherit;font-weight:400;padding:0 2px}
+.dlg input.ed,.dlg textarea.ed,.dlg select{font:11px var(--dlgfont);border:1px solid #7f9db9;padding:1px 3px;background:#fff}
+.dlg textarea.ed{resize:none}
+.dlg .lv{background:#fff;border:1px solid #7f9db9;overflow:auto}
+.dlg .lv .row{display:flex;align-items:center;gap:5px;padding:2px 4px;cursor:default}
+.dlg .lv .row.sel{background:#316ac5;color:#fff}
+.dlg .lv .row img{width:16px;height:16px;object-fit:contain}
+.dlg .lv.tiles{display:flex;flex-wrap:wrap;align-content:flex-start;gap:4px;padding:4px}
+.dlg .lv .tile{width:52px;height:52px;padding:2px;border:1px solid transparent}
+.dlg .lv .tile img{width:46px;height:46px;display:block;object-fit:cover;border:1px solid #b8c6d6}
+.dlg .lv .tile.sel{background:#316ac5;border-color:#316ac5}
+.dlg .lv .tile.nopic{display:grid;place-items:center;font-size:9px;color:#666;text-align:center;border:1px dashed #9aa}
+.dlg .lnk{color:#0000ff;text-decoration:underline;cursor:pointer}
+.dlg .ico{width:20px;height:20px;object-fit:contain}
+.dlg .pv{border:1px solid #7f9db9;background:#fff;display:grid;place-items:center}
+.dlg .pv img{max-width:100%;max-height:100%}
+.optframe{display:flex;flex-direction:column}
+.optframe .cats .row{padding:4px 6px}
+.optframe .cats .row img{width:24px;height:24px}
+.proptabs{display:flex;gap:0;padding:6px 8px 0}
+.proptabs div{padding:3px 10px;border:1px solid #919b9c;border-bottom:0;margin-right:-1px;background:#f4f3ee;cursor:default;font:11px var(--dlgfont);position:relative;top:2px}
+.proptabs div.sel{background:#fcfcfe;top:0;padding-bottom:5px;border-top:2px solid #ffc83c;z-index:1}
+.proppage{margin:0 8px;border:1px solid #919b9c;background:#fcfcfe;position:relative;overflow:auto;flex:1}
+.dlgbtns{display:flex;justify-content:flex-end;gap:6px;padding:8px}
+.dlgbtns .pb{min-width:75px;height:23px}
+
+/* ---------------- fake Windows file dialog + crop step ---------------- */
+.fileopen{display:flex;flex-direction:column;flex:1;min-height:0;background:#fff}
+.fileopen .addr{display:flex;gap:6px;align-items:center;padding:6px 10px;border-bottom:1px solid #b9c9da;background:#f3f6fb}
+.fileopen .addr .crumb{flex:1;background:#fff;border:1px solid #8ea4bf;padding:3px 6px}
+.fileopen .fbody{display:flex;flex:1;min-height:0}
+.fileopen .nav{width:140px;border-right:1px solid #c7d5e4;padding:8px 6px;display:flex;flex-direction:column;gap:3px;background:#eef3fa}
+.fileopen .nav div{padding:3px 6px}
+.fileopen .nav div.sel{background:var(--sel)}
+.fileopen .files{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;padding:10px;overflow:auto}
+.fileopen .f{width:96px;padding:4px;border:1px solid transparent;text-align:center;font-size:11px;word-break:break-all}
+.fileopen .f img{width:80px;height:64px;object-fit:cover;border:1px solid #ccc;display:block;margin:0 auto 3px}
+.fileopen .f:hover{background:var(--hover);border-color:var(--hover-b)}
+.fileopen .f.sel{background:var(--sel);border-color:var(--sel-b)}
+.fileopen .ffoot{padding:8px 10px;display:grid;grid-template-columns:auto 1fr auto;gap:6px 8px;align-items:center;border-top:1px solid #d5dde6;background:#f3f6fb}
+.fileopen .ffoot input,.fileopen .ffoot select{font:inherit;padding:2px 4px;border:1px solid #abadb3}
+.crop{position:relative;width:320px;height:278px;background-size:cover;background-position:center;margin:0 auto;border:1px solid #888}
+.crop .shade{position:absolute;inset:0;background:#0007;
+  -webkit-mask:linear-gradient(#000,#000) exclude,linear-gradient(#000,#000) 80px 50px/170px 170px no-repeat;
+  mask:linear-gradient(#000,#000) exclude,linear-gradient(#000,#000) 80px 50px/170px 170px no-repeat}
+.crop .box{position:absolute;left:80px;top:50px;width:170px;height:170px;border:1px dashed #fff}
+.crop .box i{position:absolute;width:8px;height:8px;background:#fff;border:1px solid #333}
+.mockflag{background:#fff7d6;border:1px solid #e4c96a;color:#6b5500;padding:4px 8px;font-size:11px}
+.pad{padding:12px;display:flex;flex-direction:column;gap:8px}
+/* picture push-buttons (2012 Contacts page) */
+.dlg .imgradio{display:block;border:1px solid #b8c2cc;border-radius:3px;background:#fff;cursor:pointer;overflow:hidden}
+.dlg .imgradio input{position:absolute;opacity:0}
+.dlg .imgradio:has(input:checked){border:2px solid #3c8fdc;background:#eaf3fc}
+.dlg .imgradio .pvw{display:flex;flex-direction:column;justify-content:center;gap:2px;height:100%;padding:2px 4px}
+.dlg .imgradio .lr{display:flex;align-items:center;gap:3px}
+.dlg .imgradio .lr b{flex:none;background:#8fb8e0;border:1px solid #58c21a;border-radius:2px}
+.dlg .imgradio .lr s{flex:none;width:4px;height:4px;background:#58c21a;border-radius:1px}
+.dlg .imgradio .lr u{flex:1;height:3px;background:#b8c4d0;border-radius:2px}
+/* group-level picture size (2012 Favorites) overrides the list-level one */
+.group.pics-none .c .mini{display:none!important}.group.pics-none .c .si{display:block!important}
+.group.pics-none .c .lines{flex-direction:row!important}
+/* add-a-contact window */
+.addc .h{font-size:13px;color:#1e3287}
+.addc label{display:flex;flex-direction:column;gap:2px;font:11px Tahoma,sans-serif}
+.addc input,.addc select,.addc textarea{font:11px Tahoma,sans-serif;padding:3px 4px;border:1px solid #7f9db9}
+.addc .btns{display:flex;justify-content:flex-end;gap:6px;margin-top:auto}
+.addc .btns .pb{min-width:80px;height:23px}
+
+/* ---------------- voice & video calls ---------------- */
+.tbtn.pressed{border-color:#7a9cc6!important;background:linear-gradient(#dfe9f6,#eef4fb)!important;box-shadow:inset 1px 1px 2px #0003}
+.fakecam{position:absolute;inset:0;background:#1b2530 center/cover no-repeat;animation:camdrift 9s ease-in-out infinite alternate;filter:contrast(1.08) saturate(.85) brightness(.97)}
+.fakecam::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff08 0 1px,transparent 1px 3px);animation:camnoise .25s steps(2) infinite;pointer-events:none}
+.fakecam.sil{background:radial-gradient(circle at 50% 36%,#d8bf9f 0 15%,transparent 15.5%),radial-gradient(ellipse 34% 40% at 50% 100%,#3d6593 0 98%,transparent 100%),linear-gradient(#8093a8,#34465a)}
+@keyframes camdrift{from{transform:scale(1.08) translate(-2%,-1%)}to{transform:scale(1.16) translate(2%,1.5%)}}
+@keyframes camnoise{50%{opacity:.6}}
+.vu{display:flex;flex-direction:column-reverse;gap:1px;width:8px}
+.vu i{height:4px;background:#c9d3dc;border-radius:1px}
+.vu.on i{animation:vu 0.9s ease-in-out infinite}
+.vu.on i:nth-child(2){animation-delay:.1s}.vu.on i:nth-child(3){animation-delay:.2s}.vu.on i:nth-child(4){animation-delay:.3s}
+.vu.on i:nth-child(5){animation-delay:.15s}.vu.on i:nth-child(6){animation-delay:.25s}.vu.on i:nth-child(7){animation-delay:.35s}.vu.on i:nth-child(8){animation-delay:.05s}
+@keyframes vu{0%,100%{background:#c9d3dc}40%{background:#5cc23a}}
+/* 7.5 / 8.5: the display-picture column becomes the audio/video area */
+.pane.side.incall.video{width:auto}
+.pane.side.incall .avrow{display:flex;gap:3px;align-items:stretch}
+.pane.side.incall .avhost{position:relative;width:106px;height:106px;overflow:hidden;background:#000;border:1px solid #7f9bb8}
+.pane.side.incall.video .dpbox:first-child .avhost{width:240px;height:180px}
+.pane.side.incall .avhost.me{width:106px;height:80px}
+.pane.side.incall .avhost.preroll{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;color:#1c3f66;font-size:11px}
+.pane.side.incall .avhost.preroll .bfly{width:60px}
+.pane.side.incall .avhost.preroll .con{color:#666}
+.pane.side.incall .audioctl{display:flex;flex-direction:column;align-items:center;gap:4px;width:22px}
+.pane.side.incall .audioctl .mute{display:flex;flex-direction:column;align-items:center;font-size:10px;cursor:pointer}
+.pane.side.incall .audioctl .mute input{margin:0}
+.pane.side.incall .audioctl .vol{writing-mode:vertical-lr;direction:rtl;width:16px;height:60px}
+.pane.side.incall .audioctl .fs{width:20px;height:18px;padding:0;font-size:11px;cursor:pointer}
+.pane.side.incall .caret{display:flex;align-items:center;gap:6px;min-height:18px;font-size:11px;color:#56708c;margin-top:2px}
+.pane.side.incall .caret .pb{height:20px;padding:0 8px}
+.pane.side.incall .caret a{cursor:pointer}
+.callprompt a{cursor:pointer;color:var(--link);text-decoration:underline}
+.callprompt .btnrow{display:flex;gap:6px;margin-top:4px}
+.callprompt .btnrow .pb{height:22px;padding:0 10px}
+/* 4.7: the call section at the top of the sidebar */
+.wm-call{display:flex;flex-direction:column;gap:5px}
+.wm-call .wmvid{position:relative;width:100%;aspect-ratio:176/144;background:#000;overflow:hidden;display:grid;place-items:center}
+.wm-call .wmvid .nov{max-width:60%}
+.wm-call .wmvid .pip{position:absolute;right:4px;bottom:4px;width:34%;aspect-ratio:4/3;border:1px solid #fff;overflow:hidden}
+.wm-call .st{font-size:11px;color:#215dc6}
+.wm-call .vrow{display:flex;flex-direction:column;font-size:11px}
+.wm-call .vrow input{width:100%}
+/* 2012: call area under the scene header */
+.w12-call{flex:none;margin:6px 8px 0;border-radius:4px;overflow:hidden;background:#1f2a35;color:#fff;display:flex;flex-direction:column}
+.w12-call .stage{position:relative;min-height:120px;display:flex;align-items:center;justify-content:center}
+.w12-call.video .stage{height:230px}
+.w12-call .stage .fakecam.big{position:absolute;inset:0}
+.w12-call .stage .pip{position:absolute;right:10px;bottom:10px;width:120px;height:90px;border:2px solid #fff;border-radius:3px;overflow:hidden;box-shadow:0 2px 6px #0008}
+.w12-call .stage .cap{position:absolute;left:10px;top:8px;font-size:12px;text-shadow:0 1px 2px #000}
+.w12-call .ask{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;text-align:center}
+.w12-call .ask .dp{width:64px;height:64px}
+.w12-call .ask .txt{font-size:14px}
+.w12-call .ask .sub{font-size:11px;opacity:.8}
+.w12-call .btnrow{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.w12-call .bar{display:flex;gap:6px;align-items:center;padding:5px 8px;background:#2b3845}
+.w12-call .bar .end{background:linear-gradient(#e2574c,#c0392b)!important;color:#fff!important;border-color:#8e2a20!important;height:24px;padding:0 12px}
+.w12-call .bar .tbtn{color:#fff;height:24px}
+.w12-call .bar .tbtn.off{opacity:.45;text-decoration:line-through}
+/* Font common dialog */
+.fontdlg{font:11px Tahoma,sans-serif}
+.fontdlg .cols{display:grid;grid-template-columns:1.6fr 1.1fr .6fr auto;gap:8px}
+.fontdlg .cols label{display:flex;flex-direction:column;gap:2px}
+.fontdlg input,.fontdlg select{font:11px Tahoma,sans-serif;border:1px solid #7f9db9}
+.fontdlg .btns2{display:flex;flex-direction:column;gap:6px;padding-top:14px}
+.fontdlg .btns2 .pb{min-width:75px;height:23px}
+.fontdlg .cols2{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}
+.fontdlg fieldset{border:1px solid #d0d0bf;border-radius:3px;padding:4px 8px;display:flex;flex-direction:column;gap:4px}
+.fontdlg .ck{display:flex;gap:4px;align-items:center}
+.fontdlg .sample{height:48px;display:grid;place-items:center;border:1px solid #aca899;background:#fff;overflow:hidden}
+/* message history window (MessageLog.xsl layout) */
+.histwin .histbody{flex:1;overflow:auto;background:#fff;margin:0}
+.msglog{font-family:"Segoe UI",Tahoma,sans-serif;font-size:12px;border-collapse:collapse;table-layout:fixed;vertical-align:top}
+.msglog th{border-bottom:1px solid #000;text-align:left;font-weight:700;padding:2px 0}
+.msglog td{vertical-align:top;padding:1px 0}
+.msglog tr.z{background:#e0edff}
+/* file transfer boxes */
+.ftbox{display:flex;gap:8px;margin:6px 0;padding:6px 8px;border:1px solid #c8d4e2;border-radius:3px;background:#f7fafd;max-width:360px}
+.ftbox img{width:24px;height:24px;object-fit:contain}
+.ftbox .fb{flex:1;min-width:0}
+.ftbox .fn{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ftbox .kb{font-weight:400;color:#6b7b8c}
+.ftbox .ft{color:#4b5b6b;margin-top:2px}
+.ftbox .fa{margin-top:3px}
+.ftbox .fa a{cursor:pointer;color:var(--link);text-decoration:underline}
+.ftbar{height:10px;border:1px solid #8aa4c0;background:#fff;margin-top:4px;border-radius:2px;overflow:hidden}
+.ftbar i{display:block;height:100%;background:linear-gradient(#8fd06c,#4da52a)}
+.ftn{font-size:10px;color:#6b7b8c}
+.fileopen .ficon{width:48px;height:56px;margin:0 auto 3px;border:1px solid #9aa9b8;border-radius:2px;background:linear-gradient(#fff,#e8eef5);display:grid;place-items:center;font:bold 10px Tahoma;color:#4b6a8a}
+/* custom emoticons, winks, backgrounds */
+.cemo{width:19px;height:19px;vertical-align:-4px;object-fit:contain}
+.winkgrid{display:grid;grid-template-columns:repeat(5,46px);gap:4px}
+.winkgrid span{width:46px;height:46px;border:1px solid transparent;display:grid;place-items:center;cursor:pointer}
+.winkgrid span:hover{border-color:var(--hover-b);background:var(--hover)}
+.winkgrid img{max-width:42px;max-height:42px}
+.winkgrid.big{grid-template-columns:repeat(auto-fill,76px);display:grid;align-content:start}
+.winkgrid.big figure{margin:0;padding:3px;border:1px solid transparent;text-align:center;font-size:10px;cursor:pointer}
+.winkgrid.big figure img{width:60px;height:60px;object-fit:contain;display:block;margin:0 auto}
+.winkgrid.big figure.sel{background:var(--sel);border-color:var(--sel-b)}
+.winkbox{margin:6px 0}
+.winkbox img{width:64px;height:64px;object-fit:contain;cursor:pointer;border:1px solid #d5dde6;border-radius:3px;background:#fff}
+.winkbox .wn{font-size:10px;color:#6b7b8c}
+.winkfx{position:fixed;z-index:2147483000;pointer-events:none;background:transparent}
+.winkplay{flex:1;display:grid;place-items:center;background:#fff;position:relative}
+.winkplay img{max-width:70%}
+.winkplay .note{position:absolute;bottom:6px;left:8px;right:8px;font-size:11px;color:#666}
+.bggrid{flex:1;overflow:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;align-content:start;background:#fff;border:1px solid #7f9db9;padding:6px}
+.bggrid figure{margin:0;border:2px solid transparent;cursor:pointer;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
+.bggrid figure img{width:100%;height:100%;object-fit:cover}
+.bggrid figure .none{color:#777;font-size:11px}
+.bggrid figure.sel{border-color:#316ac5}
+/* setup wizards */
+.wizbody{flex:1;min-height:0;overflow:auto;padding:10px 14px}
+.wizsep{height:1px;border-top:1px solid #aca899;margin:0 8px}
+.wizintro::before{content:"";position:absolute;left:0;top:0;bottom:0;width:175px;background:linear-gradient(160deg,#3a6fd8,#8ab6f0 60%,#e6eefb)}
+.avprev{position:absolute;overflow:hidden;background:#000;border:1px solid #7f9db9}
+.lvl{background:#fff;border:1px solid #7f9db9;overflow:hidden}
+.lvl i{position:absolute;background:linear-gradient(90deg,#5cc23a,#e6d23a 70%,#e05a2a);animation:lvl 1.1s ease-in-out infinite}
+.lvl.v i{left:0;right:0;bottom:0;height:40%;background:linear-gradient(0deg,#5cc23a,#e6d23a 70%,#e05a2a)}
+.lvl.h i{left:0;top:0;bottom:0;width:40%}
+.lvl{position:absolute}
+.atw .lvl{position:relative;display:block;margin-top:8px}
+@keyframes lvl{0%,100%{opacity:.9;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+.lvl.v i{transform-origin:bottom}.lvl.h i{transform-origin:left}
+.atw{display:flex;flex-direction:column;gap:8px;font:11px Tahoma,sans-serif}
+/* version switch: fade the desktop windows out and back in */
+.win{transition:opacity .12s ease}
+body.switching .win,body.switching .toast{opacity:0}
+
+/* touch screens: no double-tap zoom (double-tap opens chats), pinch zoom still works; dragging a title bar or edge moves / resizes */
+html{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.titlebar,.rh{touch-action:none}
+@media (pointer:coarse){
+  .rh.n,.rh.s{height:16px}.rh.n{top:-8px}.rh.s{bottom:-8px}
+  .rh.e,.rh.w{width:16px}.rh.e{right:-8px}.rh.w{left:-8px}
+  .rh.ne,.rh.nw,.rh.se,.rh.sw{width:24px;height:24px}
+  .rh.ne{top:-8px;right:-8px}.rh.sw{bottom:-8px;left:-8px}.rh.nw{top:-8px;left:-8px}.rh.se{bottom:-8px;right:-8px}
+}
+.oldmsg{opacity:.5}
+body.noshadow .win{box-shadow:none!important}
+
+/* handwriting (ink) */
+.inkpad{flex:1;height:var(--inh,58px);min-width:0;background:#fff;cursor:crosshair;touch-action:none;outline:0;display:block}
+.inktabs{display:flex;flex-direction:column;justify-content:flex-end;gap:1px;padding:0 2px 2px;flex:none}
+.inktab{min-width:22px;height:21px;padding:0 4px;border:1px solid #9db6e4;border-radius:0 0 3px 3px;background:#eef3fb;cursor:pointer;display:flex;align-items:center;justify-content:center;font:11px Tahoma;color:#1b3b8a}
+.inktab.sel{background:#fff;border-color:#6d8fcf;font-weight:700}
+.inktab img{max-width:18px;max-height:16px}
+.tbtn.ink.on{background:#dce8fb;border-color:#7ea3de}
+.tbtn.ink.dd{min-width:12px;padding:0 2px;font-size:9px}
+.tbtn.ink img{max-height:16px}
+.inkswatch{display:inline-block;width:10px;height:10px;border:1px solid #777;margin-left:2px;vertical-align:-1px}
+.inkpal{display:grid;grid-template-columns:repeat(8,16px);gap:3px;padding:6px;background:#fff;border:1px solid #7f9db9;position:fixed}
+.inkpal i{width:16px;height:16px;border:1px solid #999;cursor:pointer}.inkpal i.sel{outline:2px solid #316ac5}
+.inkpal a{grid-column:1/-1;font-size:11px}
+.inkmsg{display:block;max-width:100%;object-fit:contain;margin-top:2px}
+.startmenu .smb .prog,.startmenu .smb .places{display:flex;flex-direction:column;gap:1px;min-width:0}
+.startmenu .places .it b{font-weight:700}
+.startmenu .note2{font-size:11px;padding:4px 8px;opacity:.8}
+.startmenu .smf .lo{display:flex;align-items:center;gap:4px;cursor:pointer;padding:2px 4px;border-radius:3px}
+.startmenu .smf .lo:hover{background:#ffffff26}
+.startmenu .smf .lo img{width:24px;height:24px}
+.startmenu .smh span{font-weight:400}
+
+/* XP Start panel: most-used / pinned items have 32 px icons, places 24 px; Tahoma 8 pt; pinned captions grey */
+.startmenu{display:flex;flex-direction:column}
+.startmenu .smb{flex:none}
+.startmenu .prog{overflow:hidden}
+.startmenu .prog .it{display:flex;align-items:center;gap:6px;padding:1px 4px;min-height:34px;line-height:1.15;font:11px Tahoma,sans-serif;border-radius:0}
+.startmenu .prog .it img{width:32px;height:32px;object-fit:contain;flex:none}
+.startmenu .prog .it small{display:block;color:#808080;font-weight:400}
+.startmenu .prog .it:hover small{color:#fff}
+.startmenu .prog .it.cur{font-weight:700}
+.startmenu .places .it{display:flex;align-items:center;gap:6px;padding:1px 4px;min-height:26px;line-height:1.15;font:11px Tahoma,sans-serif;position:relative}
+.startmenu .places .it img{width:24px;height:24px;flex:none}
+.startmenu .places .it.bold{font-weight:700}
+.startmenu .places .it.sub::after{content:"";position:absolute;right:6px;top:50%;margin-top:-4px;border:4px solid transparent;border-left:4px solid currentColor;border-right:0}
+.startmenu .smf .lo{display:flex;align-items:center;gap:4px;cursor:pointer;padding:2px 4px;font:11px Tahoma,sans-serif}
+.startmenu .smf .lo img{width:24px;height:24px}
+.startmenu .smh img{flex:none}
+.startmenu .prog .sep,.startmenu .places .sep{margin:3px 0}
+
+/* ---- MSN 6.2 / 7.5 alert (UIFILE 921 "MsgrToastRoot") */
+.toast.t7{width:200px;background:none;border:0;border-radius:0;font:11px Tahoma,"MS Shell Dlg 2",sans-serif;color:#1f336b;box-shadow:none}
+.t7 .t7h{height:24px;display:flex;align-items:center;gap:3px;padding:0 5px 0 7px;color:#1f336b;
+  background:var(--hl) left top no-repeat,var(--hr) right top no-repeat,var(--h) 0 0/1px 24px repeat-x,#7a96df}
+.t7 .t7h img{width:13px;height:13px}
+.t7 .t7h .tb7{flex:1;padding-left:3px;white-space:nowrap;overflow:hidden}
+.t7 .t7h .x{width:13px;height:13px;background:var(--x);cursor:default}
+.t7 .t7h .x:hover{background-image:var(--xh)}.t7 .t7h .x:active{background-image:var(--xd)}
+.t7 .t7w{border:0 solid transparent;border-width:0 3px 3px;border-image:var(--fr) 0 3 3 3 / 0 3px 3px 3px stretch}
+.t7 .t7opt{text-align:right;padding:0 1px 0 0;background:linear-gradient(#cfddf4,#fff);min-height:14px}
+.t7 .topt{font-size:12px;color:#1f336b;cursor:pointer}.t7 .topt:hover{text-decoration:underline}
+.t7 .t7c{display:flex;gap:5px;padding:2px 5px 6px;background:linear-gradient(#fff,#cfddf4);min-height:62px}
+.t7 .t7tile{flex:none;padding:6px 5px;border:0 solid transparent;border-image:var(--tile) 6 5 6 5 fill / 6px 5px 6px 5px stretch}
+.t7 .t7tile img{width:40px;height:40px;object-fit:cover;display:block}
+.t7 .t7m{padding:3px 0 0 3px;word-break:break-word}
+.t7 .tn{color:#1f336b}
+.t7 .t7f{height:8px;background:linear-gradient(#cfddf4,#edf2fb)}
+/* ---- 8.5 / 2009 alert (4004/921): frameless branded window, colours from 8.5's style resources */
+.toast.t8{width:220px;border:1px solid #bed6e0;border-radius:3px;background:linear-gradient(#ecf0f5,#fff 40%);color:#333;font:12px "Segoe UI",Tahoma,sans-serif;box-shadow:0 2px 8px #0004}
+.t8 .t8h{display:flex;align-items:center;gap:5px;padding:4px 5px 2px 6px;color:#264989}
+.t8 .t8h img{width:16px;height:16px}.t8 .t8h span:first-of-type{flex:1}
+.t8 .t8h .x{width:18px;text-align:center;color:#555;cursor:default}.t8 .t8h .x:hover{color:#000}
+.t8 .t8c{display:flex;gap:6px;padding:4px 6px 2px 4px}
+.t8 .t8c .dp,.t8 .t8c .tp{width:48px;height:48px;flex:none}
+.t8 .t8m{padding:3px 1px 3px 3px}
+.t8 .t8f{text-align:right;padding:0 6px 4px;min-height:6px}
+.t8 .topt,.t12 .topt{color:#0088e4;cursor:pointer;font-size:11px}.t8 .topt:hover,.t12 .topt:hover{text-decoration:underline}
+.t12 .t12f{text-align:right;padding:0 8px 6px}
+/* call mute toggles: no visible checkbox, the icon shows the state (muted: crossed out / dimmed) */
+.audioctl .mute input{display:none}
+.audioctl .mute span{display:block;width:18px;text-align:center;border-radius:2px;padding:1px 0}
+.audioctl .mute:hover span{background:#ffffff80}
+.audioctl .mute.on span{opacity:.6;text-decoration:line-through}
+
+.csplit{flex:none;height:6px;margin:-6px 0;cursor:ns-resize;touch-action:none;position:relative;z-index:1}
+
+/* 2009 photo sharing (4010/942) in the conversation drawer (4010/920); sizes and pictures are the markup's */
+.psdrawer{flex:1;min-height:0;display:flex;flex-direction:column;font:12px "Segoe UI",Tahoma,sans-serif;color:#1e395b}
+.psdrawer.collapsed{flex:none}
+.hist.psunder{display:none}
+.psexp{flex:1;min-height:0;display:flex;padding-bottom:8px}
+.psdrawer.collapsed .psexp,.psdrawer:not(.collapsed) .pscol{display:none}
+.psmain{flex:1;min-width:0;position:relative;display:flex;align-items:center;justify-content:center}
+.psframe{position:relative;padding:1px 5px 5px 1px;border:7px solid transparent;border-image:url(../assets/2009/ps_mainframe.png) 7 fill / 7px stretch;max-width:calc(100% - 20px);max-height:calc(100% - 20px);display:flex}
+.psframe img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.psframe .psold{position:absolute;inset:1px 5px 5px 1px;opacity:0;pointer-events:none}
+.psframe .psold.fade{animation:psfade .25s linear}
+@keyframes psfade{from{opacity:1}to{opacity:0}}
+.psctl{position:absolute;left:36px;right:0;bottom:8px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+.psmain:hover .psctl{opacity:1}
+.psctl button{border:0;background:no-repeat center;padding:0;cursor:pointer}
+.psnav{width:41px;height:25px}
+.psnav.prev{background-image:url(../assets/2009/ps_prev.png)}.psnav.prev:hover{background-image:url(../assets/2009/ps_prev_h.png)}.psnav.prev:active{background-image:url(../assets/2009/ps_prev_p.png)}
+.psnav.next{background-image:url(../assets/2009/ps_next.png)}.psnav.next:hover{background-image:url(../assets/2009/ps_next_h.png)}.psnav.next:active{background-image:url(../assets/2009/ps_next_p.png)}
+.psdiv{width:1px;height:25px;background:url(../assets/2009/ps_div.png)}
+.pssave{width:24px;height:24px;margin-left:12px;background-image:url(../assets/2009/ps_save.png)!important}
+.pssave:hover{background-image:url(../assets/2009/ps_save_h.png)!important}.pssave:active{background-image:url(../assets/2009/ps_save_p.png)!important}
+.pssave:disabled{background-image:url(../assets/2009/ps_save_dis.png)!important;cursor:default}
+.psside{position:relative;width:98px;flex:none;display:flex;flex-direction:column;margin:10px 0 0 10px;padding-left:7px;background:url(../assets/2009/ps_hostbg.png) 0 0/100% 100%}
+.psdivider{position:absolute;left:0;top:7px;bottom:0;width:7px;background:url(../assets/2009/ps_divider.png) 0 0/100% 100%}
+.pstop{display:flex;align-items:center;padding-left:5px}
+.pstop .psadd{flex:1;justify-content:flex-start}
+.psbtn{display:flex;align-items:center;gap:3px;border:0;background:none;padding:4px;font:inherit;color:inherit;cursor:pointer;border-radius:0}
+.psbtn.psadd:hover{border-image:url(../assets/2009/ps_btnbg_h.png) 0 4 fill / 0 4px stretch}
+.psbtn.psadd:active{border-image:url(../assets/2009/ps_btnbg_p.png) 0 4 fill / 0 4px stretch}
+.psbtn.psclose{padding:0;margin-left:2px}
+.psbtn.psclose:hover img{content:url(../assets/2009/ps_close_h.png)}
+.psthumbs{flex:1;min-height:0;overflow-y:auto}
+.psthumb{position:relative;width:46px;height:46px;margin:0 14px 14px 0;box-sizing:border-box;padding:6px;border:7px solid transparent;border-image:url(../assets/2009/ps_thumbframe.png) 7 fill / 7px stretch;cursor:pointer}
+.psthumb:hover{border-image:url(../assets/2009/ps_thumb_h.png) 3 fill / 3px stretch}
+.psthumb.sel{border-image:url(../assets/2009/ps_thumb_s.png) 3 fill / 3px stretch}
+.psthumb .pti{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.psthumb .pti img{max-width:100%;max-height:100%;object-fit:contain}
+.psthumb .pscheck{position:absolute;right:-6px;bottom:-6px}
+.psthumb .pspct{position:absolute;inset:-7px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:#fff;text-shadow:0 0 4px #000}
+.psxofy{padding:11px 0 0 9px}
+.pscol{display:flex;flex-direction:column;align-items:flex-end;padding:0 0 24px 11px}
+.pscol .psxofy{padding:0 0 0 3px}
+.psbar{height:16px;flex:none;background:url(../assets/2009/drawerbar.png) 0 0/100% 100%;cursor:pointer}
+.psbar:hover{background:url(../assets/2009/drawer_collapse.png) center no-repeat,url(../assets/2009/drawerbar_h.png) 0 0/100% 100%}
+.psdrawer.collapsed .psbar:hover{background:url(../assets/2009/drawer_expand.png) center no-repeat,url(../assets/2009/drawerbar_h.png) 0 0/100% 100%}
+
+/* mockup debug window */
+#debug .debug{padding:6px 8px 8px;display:flex;flex-direction:column;gap:6px;font:11px Tahoma,sans-serif;background:#ece9d8}
+#debug fieldset{border:1px solid #d0d0bf;border-radius:3px;padding:4px 6px 6px;margin:0;display:flex;flex-direction:column;gap:4px}
+#debug legend{color:#0046d5;padding:0 3px}
+#debug button{height:23px;font:11px Tahoma,sans-serif;text-align:left;padding:0 8px}
+
+/* 2012 badge dialog (4010/939 MyBadgesDlg) */
+.badgedlg{flex:1;min-height:0;display:flex;flex-direction:column;background:#fcfcfc;font:12px "Segoe UI",Tahoma,sans-serif;color:#2a2a2a}
+.badgedlg .bd-head{padding:15px 20px 0}
+.badgedlg .bd-h{color:#0355a8;font-size:16px}
+.badgedlg .bd-desc{color:#888;margin-top:2px}
+.badgedlg .bd-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 20px 0;overflow:auto}
+.badgedlg .bd-upsell{padding-right:10px}
+.badgedlg .bd-sup{color:#2a2a2a;margin-top:6px}
+.badgedlg .bd-upsell img{display:block;margin-top:8px}
+.badgedlg .bd-it{font-weight:700;padding:10px 5px 0 0}
+.badgedlg .bd-list{min-height:40px}
+.badgedlg .bd-inst .btn{align-self:flex-start;margin:2px 5px}
+.badgedlg .bd-inst{display:flex;flex-direction:column}
+.badgedlg .bd-fl{color:#0355a8;cursor:pointer}
+.badgedlg .bd-fl:hover{text-decoration:underline}
+.badgedlg .bd-foot{display:flex;justify-content:flex-end;padding:15px 20px}
+.badgedlg .bd-foot .btn{min-width:72px;padding:4px 6px;margin:2px 5px}
+.badgedlg .bd-feat{margin-top:auto;padding-top:8px}
+
+/* windows rebuilt from the programs' markup */
+.uiwin .uibody{flex:1;min-height:0;display:grid;grid-template:1fr/1fr;overflow:hidden;font:12px "Segoe UI",Tahoma,sans-serif;color:#000}
+.uiwin .uibody button{font:inherit;background:none;border:0;padding:0;color:inherit;text-align:inherit}
+/* push buttons: 2009 / 2012 class PushButton; 7.5 / 8.5 draw theirs with dtb() = the standard themed Windows button */
+.uiwin .uibody button[data-cls="PushButton"],.uiwin .uibody :is(button.d-button,button.d-cmdbutton)[data-id^="id"]:not(.uitile):not([data-id="idHelp"]):not([data-id="idhelp"]),.uiwin .uibody button.d-cmdbutton[data-id="Preview"],.uiwin .uibody .cfbtns button{min-width:75px;min-height:23px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#ece9d8);padding:0 8px;text-align:center}
+.uiwin .uibody button[disabled]{opacity:.5}
+.uiwin .uibody a{color:#0066cc;cursor:pointer}
+.uiwin .uibody a:hover{text-decoration:underline}
+.uitiles{display:flex!important;flex-wrap:wrap;align-content:flex-start;gap:4px;padding:4px;overflow:auto;background:#fff}
+.uitile{width:auto;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid transparent!important;border-radius:2px;padding:2px!important}
+.uitile img{max-width:60px;max-height:44px}
+.uitile:hover{border-color:#a8c0e8!important;background:#eef4fd!important}
+.uitile.sel{border-color:#316ac5!important;background:#dce8fb!important}
+.card.uicard{padding:0;background:none;border:0;box-shadow:2px 3px 10px #0005;display:grid}
+.card.uicard .uibody{display:grid;grid-template:1fr/1fr;min-height:0;overflow:hidden;font:11px Tahoma,sans-serif}
+
+/* 7.5 dynamic backgrounds: the animation sits behind the conversation */
+.body.hasdyn{position:relative}
+.body.hasdyn>*:not(.dynbg){position:relative;z-index:1}
+.dynbg{position:absolute;z-index:0;pointer-events:none}
+.dynbg ruffle-player{display:block}
+.body.hasdyn .hist,.body.hasdyn .compose,.body.hasdyn .compose textarea{background:transparent}
+
+/* 2012 sharing panel (4010/942 shSharing) */
+.w12share{position:relative;height:300px;flex:none;display:flex;flex-direction:column;background:#fff;border-bottom:1px solid #d6dde5;font:12px "Segoe UI",sans-serif}
+.w12share .shmain{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;padding:8px}
+.w12share .shmain img{max-width:100%;max-height:100%;object-fit:contain}
+.w12share .shold{position:absolute;opacity:0;pointer-events:none}
+.w12share .shold.fade{animation:psfade .25s linear}
+.w12share .shtopmenu{position:absolute;left:0;right:0;top:0;height:29px;display:flex;align-items:center;justify-content:flex-end;gap:6px;opacity:0;transition:opacity .15s;border-image:url(../assets/2012/sh_bar.png) 0 150 0 90 fill / 0 150px 0 90px stretch}
+.w12share:hover .shtopmenu{opacity:1}
+.w12share .shsave{color:#fff;cursor:pointer;padding:5px 4px}
+.w12share .shsave:hover{font-style:italic}
+.w12share .shclose{width:20px;height:22px;margin-right:15px;border:0;cursor:pointer;background:url(../assets/2012/sh_close.png) center no-repeat}
+.w12share .shclose:hover{background-image:url(../assets/2012/sh_close_h.png)}
+.w12share .shstrip{height:60px;flex:none;display:flex;align-items:center;border-image:url(../assets/2012/sh_bar.png) 0 150 0 90 fill / 0 150px 0 90px stretch}
+.w12share .shscroll{width:45px;height:26px;border:0;padding:0 8px;background:center no-repeat;cursor:pointer}
+.w12share .shscroll.left{background-image:url(../assets/2012/sh_left.png)}.w12share .shscroll.left:hover{background-image:url(../assets/2012/sh_left_h.png)}.w12share .shscroll.left:active{background-image:url(../assets/2012/sh_left_p.png)}.w12share .shscroll.left:disabled{background-image:url(../assets/2012/sh_left_dis.png);cursor:default}
+.w12share .shscroll.right{background-image:url(../assets/2012/sh_right.png)}.w12share .shscroll.right:hover{background-image:url(../assets/2012/sh_right_h.png)}.w12share .shscroll.right:active{background-image:url(../assets/2012/sh_right_p.png)}.w12share .shscroll.right:disabled{background-image:url(../assets/2012/sh_right_dis.png);cursor:default}
+.w12share .shthumbs{flex:1;min-width:0;height:100%;display:flex;align-items:center;overflow:hidden}
+.w12share .shthumb{position:relative;width:46px;height:46px;flex:none;margin-right:14px;box-sizing:border-box;padding:6px;border:7px solid transparent;border-image:url(../assets/2012/sh_thumbframe.png) 7 fill / 7px stretch;cursor:pointer}
+.w12share .shthumb:hover{border-image:url(../assets/2012/sh_thumb_h.png) 3 fill / 3px stretch}
+.w12share .shthumb.sel{border-image:url(../assets/2012/sh_thumb_s.png) 3 fill / 3px stretch}
+.w12share .shthumb>img:first-child{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%}
+.w12share .shcheck{position:absolute;right:-6px;bottom:-6px}
+.uipicker{display:flex!important;flex-direction:column;overflow:auto;background:#fff;border:1px solid #a5acb5;padding:4px;min-height:120px}
+.uipicker label{display:flex;align-items:center;gap:4px;padding:1px 0}
+/* 2009 / 2012 contact window: the pages Windows Live Contacts filled in code */
+.cftabs{display:flex!important;flex-direction:column;min-height:0;flex:1;font:12px "Segoe UI",Tahoma,sans-serif;color:#333}
+.cftabbar{display:flex;gap:2px;border-bottom:1px solid #a5acb5;padding:0 4px}
+.uibody .cftabbar button{all:unset;font:inherit;border:1px solid #a5acb5;border-bottom:0;background:#eef2f7;padding:3px 10px;margin-bottom:-1px;border-radius:3px 3px 0 0;cursor:pointer}
+.uibody .cftabbar button.sel{background:#fff;font-weight:600}
+.cfpage{flex:1;overflow:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:#fff}
+.cfpage[hidden]{display:none}
+.cf{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:6px}
+.cf input,.cf select,.cf textarea{font:inherit;border:1px solid #abadb3;padding:2px 4px;min-width:0}
+.cf input::placeholder,.cf textarea::placeholder{color:#8a8a8a;font-style:italic}
+.cfd{display:flex;gap:4px}.cfnote{color:#6d6d6d;margin:-4px 0 0 156px}
+.cfnotes{grid-template-columns:1fr;align-items:stretch;flex:1}.cfnotes textarea{min-height:200px;resize:none}
+.cfbtns{display:flex;justify-content:flex-end;gap:6px;padding:8px 4px 2px}.uibody .cfbtns button{font:inherit;color:#000;cursor:default}
+.popup.uilobby{width:260px;background:#fff;border:1px solid #7a8a99;box-shadow:2px 2px 4px rgba(0,0,0,.3);z-index:30000;display:flex;flex-direction:column}
+.popup.uilobby .uibody{display:flex;flex-direction:column;min-height:60px}
+.uisndlist{display:flex!important;flex-direction:column;overflow-y:auto;overflow-x:hidden;gap:2px}
+.uipart{display:block}.uipart>*{width:100%}
+.uisndchoices{display:flex;flex-direction:column}
+.uisndlist input[type=radio]{margin:0 4px}
+.uisndchoices label.d-checkbox{display:flex!important;flex-direction:row!important;align-items:center;gap:2px}
+.uisndchoices label.d-checkbox span{white-space:nowrap}
+.fakecam.snap{position:absolute;inset:0;width:auto;height:auto}
+.flash::after{content:"";position:absolute;inset:0;background:#fff;animation:snapflash .3s ease-out forwards}
+@keyframes snapflash{from{opacity:1}to{opacity:0}}
+.uitilepic{width:48px;height:48px;object-fit:cover;display:block}
+.uibtncol{display:flex!important;flex-direction:column;gap:5px;padding-top:8px;align-self:stretch}
+.uiwin .uibody .uibtncol button.d-button{min-width:75px;min-height:23px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#ece9d8);padding:0 8px;text-align:center;color:#000}
+.uiwin .uibody .uibtncol button.d-button:hover{box-shadow:inset 0 0 0 1px #f8b336}
+/* 2012 video stage (idResVideoCallImmersive): layers placed as its layout behaviour did */
+.w12-call.vv .stage{position:relative;padding:0;background:#000;min-height:300px;display:grid}
+.w12-call.vv .stage>*{grid-area:auto}
+.w12-call.vv .vv-you{position:absolute!important;inset:0;height:auto!important}
+.w12-call.vv .vv-you .fakecam{position:absolute;inset:0;width:auto;height:auto}
+.w12-call.vv .vv-me{position:absolute!important;right:10px;bottom:40px;left:auto!important;top:auto!important;width:25%!important;height:25%!important;border:1px solid #fff;z-index:2}
+.w12-call.vv .vv-me .fakecam{position:absolute;inset:0;width:auto;height:auto}
+.w12-call.vv .vv-tile{position:absolute!important;top:50%;width:96px!important;height:96px!important;margin-top:-70px;border:2px solid #fff;z-index:2}
+.w12-call.vv [data-id="idCallSetupYouUsertile"]{left:calc(50% - 110px)}.w12-call.vv [data-id="idCallSetupMeUsertile"]{left:calc(50% + 14px)}
+.w12-call.vv .vv-tile img{width:100%;height:100%;object-fit:cover}
+.w12-call.vv .vv-msg{position:absolute!important;left:0;right:0;top:calc(50% + 40px);height:auto!important;color:#fff;text-align:center;display:block;z-index:2}
+.w12-call.vv [data-id="videocalltoolbar"]{position:absolute!important;left:0;right:0;bottom:0;top:auto!important;z-index:3;width:auto!important}
+.w12-call.vv [data-id="youmevideo"],.w12-call.vv [data-id="videolayout"],.w12-call.vv [data-id="videolayout"]>*{grid-area:auto!important}
+.w12-call.vv [data-id="youmevideo"],.w12-call.vv [data-id="videolayout"]{position:absolute!important;inset:0!important;margin:0!important;height:auto!important;width:auto!important;display:block!important}
+.w12-call.vv .vv-you{inset:0!important;margin:0!important;width:auto!important}
+.w12-call.vv .vv-you,.w12-call.vv .vv-me,.w12-call.vv [data-id="youmevideo"],.w12-call.vv [data-id="videolayout"]{align-self:stretch!important;justify-self:stretch!important}
+#debug .debug button:disabled{color:#aca899;cursor:default;background:#f4f3ee;border-color:#c9c7ba}
+/* classic Start menu (XP flat menu colours) */
+.os-xp .startmenu.classic,.startmenu.classic{width:auto;height:auto;display:flex;flex-direction:row;background:#fff;border:1px solid #aca899;border-radius:0;box-shadow:2px 2px 4px #0005;padding:1px;overflow:visible}
+.startmenu.classic .clbanner{width:21px;flex:none;background:url(../theme/xp/cl_banner.png) bottom/21px 233px no-repeat,#000}
+.startmenu.classic .clitems{display:flex;flex-direction:column;min-width:190px;font:11px Tahoma,sans-serif;color:#000}
+.startmenu.classic .it{display:flex;align-items:center;gap:8px;height:40px;padding:0 20px 0 4px;cursor:default;position:relative;white-space:nowrap}
+.startmenu.classic .it img{width:32px;height:32px;flex:none}.startmenu.classic .it img.small{width:16px;height:16px;margin:0 8px}
+.startmenu.classic .it:not(.dis):hover{background:#316ac5;color:#fff}
+.startmenu.classic .it.cur span{font-weight:bold}
+.startmenu.classic .it.dis{color:#aca899}.startmenu.classic .it.dis img{filter:grayscale(1) opacity(.55)}
+.startmenu.classic .it i{position:absolute;right:6px;top:50%;margin-top:-4px;border:4px solid transparent;border-left-color:currentColor;border-right:0}
+.startmenu.classic .sep{height:1px;background:#aca899;margin:3px 2px}
+/* phones: windows filling the desktop have no frame to drag */
+html.mobile .win.maxed .rh,html.mobile .win.maxed .grip{display:none}
+html.mobile,html.mobile body{height:100dvh;overflow:hidden;overscroll-behavior:none}
+html.mobile .win{max-width:100vw;max-height:calc(100dvh - 30px)}
+html.mobile #switcher{bottom:0}
+html.mobile #tasks{flex:1;min-width:0;display:flex}
+html.mobile #tasks button{flex:0 1 160px;min-width:34px;overflow:hidden}
+html.mobile #tasks button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.mobile .startmenu.classic{max-height:calc(100dvh - 30px);overflow-y:auto}
+/* picture tiles (UsertileButton: a 48 x 48 picture) and the icon-only Help button */
+.uitile:has(.uitilepic){height:auto;padding:3px!important}
+.uiwin .uibody button[data-id="idHelp"],.uiwin .uibody button[data-id="idhelp"]{min-width:0;border:1px solid transparent;border-radius:3px;padding:2px}
+.uiwin .uibody button[data-id="idHelp"]:hover,.uiwin .uibody button[data-id="idhelp"]:hover{border-color:#a7bcd6;background:#e8f0fa}
+/* long press = right-click (js/app.js "touch screens"): no iOS callout (Save Image / Copy) on top of the context menu */
+html.mobile body{-webkit-touch-callout:none}
+html.mobile .hist,html.mobile textarea,html.mobile input{-webkit-touch-callout:default}
+/* "To start, click here" pointer over the Start button (the mockup's own) */
+#starthint{position:fixed;left:6px;bottom:50px;z-index:99980;pointer-events:none;display:flex;flex-direction:column;align-items:flex-start;animation:shbob 1.2s ease-in-out infinite}
+#starthint .sh-bubble{background:#ffffe1;border:1px solid #000;border-radius:6px;padding:7px 12px;font:12px Tahoma,sans-serif;color:#000;box-shadow:2px 2px 5px #0005;white-space:nowrap;max-width:calc(100vw - 16px);overflow:hidden;text-overflow:ellipsis}
+#starthint .sh-bubble b{color:#1f7a1f}
+#starthint .sh-arrow{margin:2px 0 0 22px;width:14px;height:16px;background:#ffffe1;border:1px solid #000;border-bottom:0;position:relative;box-shadow:2px 0 3px #0003}
+#starthint .sh-arrow::after{content:"";position:absolute;left:-11px;top:15px;border:17px solid transparent;border-top:16px solid #000;border-bottom:0}
+#starthint .sh-arrow::before{content:"";position:absolute;left:-9px;top:15px;border:15px solid transparent;border-top:14px solid #ffffe1;border-bottom:0;z-index:1}
+@keyframes shbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+/* phones: Enter sends, so the Send / Search column gives its room to the typing area */
+html.mobile .compose .send{display:none}
+body:has(.startmenu) #starthint{display:none}
+/* phones: conversation toolbars share the width instead of running off the edge; 2012's goes under the name */
+html.mobile .w-ctb{gap:0}
+html.mobile .w-ctb .tbtn{flex:1 1 0;min-width:0;padding-left:0;padding-right:0}
+html.mobile .w-ctb .tbtn span{font-size:10px;white-space:nowrap}
+html.mobile .w12-chead{flex-wrap:wrap}
+html.mobile .w12-chead .who{flex:1 0 100%}
+html.mobile .w12-chead .acts{flex:1 0 100%;justify-content:space-between;margin:0}
+html.mobile .w12-chead .acts .tbtn{flex:1 1 0;min-width:0;padding-left:0;padding-right:0}
+html.mobile .w12-chead{height:auto!important;min-height:0!important}
+/* 2012: a tab whose conversation got a message while another tab was showing */
+.w12tabs .tab.unread{background:#f0a040!important;border-color:#d07a10!important;box-shadow:0 0 0 2px #f0a040,0 0 6px 1px #f0a040}
+/* BonziBuddy greeter: standing on the taskbar, his pointing hand over the Start button (PC and phone alike) */
+#bonzi{position:fixed;left:-50px;bottom:22px;z-index:99985;pointer-events:none}
+#bonzi .bz-sprite{background-repeat:no-repeat}
+#bonzi .bz-balloon{position:absolute;left:56px;bottom:124px;width:190px;padding:6px 9px;border:1px solid;border-radius:9px;line-height:1.3;box-shadow:1px 1px 3px #0003}
+#bonzi .bz-balloon[hidden]{display:none}
+#bonzi .bz-balloon span{display:block;min-height:3.9em}
+#bonzi .bz-balloon i,#bonzi .bz-balloon b{position:absolute;left:26px;width:0;height:0;border:9px solid transparent;border-bottom:0}
+#bonzi .bz-balloon i{bottom:-10px;border-top-width:10px}
+#bonzi .bz-balloon b{bottom:-8px;border-top-width:9px;left:26px}

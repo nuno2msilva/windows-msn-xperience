@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-version="2012">
+<head>
+<meta charset="utf-8">
+<base href="2012/">
+<title>MSN Messenger XPerience</title>
+<!-- link previews (Discord, Telegram, WhatsApp...): a small card with the title, the description and the thumbnail,
+     7.5's default display picture (the blue and green Messenger buddies) -->
+<meta name="description" content="Windows Messenger 4.7 to Windows Live Messenger 2012, rebuilt from the original program files on a Windows XP desktop.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MSN Messenger XPerience">
+<meta property="og:title" content="MSN Messenger XPerience">
+<meta property="og:description" content="Windows Messenger 4.7 to Windows Live Messenger 2012, rebuilt from the original program files on a Windows XP desktop.">
+<meta property="og:url" content="https://super-panda-9e0f3e.netlify.app/">
+<meta property="og:image" content="https://super-panda-9e0f3e.netlify.app/2012/assets/7.5/dp_default1.png">
+<meta property="og:image:width" content="96">
+<meta property="og:image:height" content="96">
+<meta property="og:image:alt" content="The MSN Messenger buddies">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a52c8">
+<link rel="icon" href="assets/7.5/dp_default1.png">
+<script>
+/* Phones and small tablets: the desktop at the screen's own width, zoom locked so the taskbar stays fixed at the
+   bottom; html.mobile makes the contact list and every conversation fill the screen above it (js/app.js "mobile").
+   The viewport tag is written here, before the page is laid out. */
+(function () {
+  var small = Math.min(screen.width, screen.height) < 820;
+  if (small) document.documentElement.classList.add("mobile");
+  document.write('<meta name="viewport" id="vp" content="width=device-width, initial-scale=1' + (small ? ', maximum-scale=1, user-scalable=no' : '') + '">');
+})();
+</script>
+<!--
+  Mockups of Windows Messenger 4.7, MSN Messenger 6.2 / 7.5 and Windows Live Messenger 8.5 / 2009 / 2012,
+  rebuilt from the original program files in "msn project/". This is 2012's own page (site/2012/); tools/build.py
+  regenerates its assets/ and data.js (through tools/distribute.py).
+-->
+<link rel="stylesheet" href="css/base.css?v=20260927160218">
+<link rel="stylesheet" href="css/themes.css?v=20260927160218">
+<link rel="stylesheet" href="css/xp.css?v=20260927160218">
+</head>
+<body class="os-vista lay-wlm">
+
+<div class="win" id="main">
+  <div class="titlebar"><img class="appicon" alt=""><span class="t"></span>
+    <div class="cap"><span data-act="min">&#8212;</span><span data-act="max">&#9633;</span><span data-act="close">&#10005;</span></div></div>
+  <div class="menubar" id="mainMenu"></div>
+  <div class="body" id="mainBody"></div>
+</div>
+
+
+<div class="card" id="card"></div>
+
+<div id="switcher">
+  <button class="orb" id="orb" title="Start: open Messenger windows or choose a version"><span>start</span></button>
+  <div id="tasks"></div>
+  <span class="hint" id="verLabel"></span>
+</div>
+
+<script src="data.js?v=20260927160218"></script>
+<script src="js/versions.js?v=20260927160218"></script>
+<script src="js/ink.js?v=20260927160218"></script>
+<script src="js/app.js?v=20260927160218"></script>
+</body>
+</html>
